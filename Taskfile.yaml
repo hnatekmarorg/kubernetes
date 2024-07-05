@@ -1,0 +1,28 @@
+version: 3
+
+tasks:
+  bootstrap:
+    cmds:
+      - |
+        helm repo add sops https://isindir.github.io/sops-secrets-operator/
+        helm upgrade --install sops sops/sops-secrets-operator --namespace sops-operator --create-namespace -f ./bootstrapping/sops.yaml
+        kubectl create secret generic -n sops-operator --from-file=key=./bootstrapping/age/key.txt sops-age-key-file || exit 0
+        
+        kubectl create namespace argocd
+        kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+        kubectl apply -f ./bootstrap/argocd-application.yaml
+  encrypt:
+    cmds:
+      - |
+        for file in ./manifests/secrets/*.yaml
+        do
+          BASE_NAME=$(basename $file)
+          echo Encrypting $BASE_NAME
+          sops --age "$(cat ./bootstrapping/age/public.txt)" --encrypted-suffix='Templates' -e "./manifests/secrets/$BASE_NAME"  > ./manifests/secrets/encrypted/$BASE_NAME
+        done
+  argo_info:
+    cmds:
+      - |
+        ARGOCD_PASSWORD=$(kubectl get secret -n argocd argocd-initial-admin-secret -o yaml | grep password | awk '{ print $2 }' | base64 -d) 
+        echo "You can login into argocd via admin / $ARGOCD_PASSWORD"
+        echo "To access web interface please run 'kubectl port-forward svc/argocd-server -n argocd 8980:443' and then access https://localhost:8980"
