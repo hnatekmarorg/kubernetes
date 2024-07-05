@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: kong
   namespace: argocd
 spec:
   project: default
   source:
-    chart: kong/ingress
+    chart: ingress
     repoURL: https://charts.konghq.com
     targetRevision: 0.13.1
     helm:
