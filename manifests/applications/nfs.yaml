@@ -8,7 +8,7 @@ spec:
   source:
     chart: ingress
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-    targetRevision: 4.0.18
+    targetRevision: nfs-subdir-external-provisioner-4.0.18
     helm:
       releaseName: nfs-subdir-external-provisioner
     valuesObject:
