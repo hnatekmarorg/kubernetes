@@ -18,6 +18,7 @@ spec:
       releaseName: ollama
     valuesObject:
       ollama:
+        enabled: true
         gpu:
           type: 'nvidia'
           number: 2
