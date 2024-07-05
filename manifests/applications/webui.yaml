@@ -17,6 +17,8 @@ spec:
     helm:
       releaseName: open-webui
       valuesObject:
+        pipelines:
+          enabled: False
         ollama:
           enabled: False
         extraEvnVars:
