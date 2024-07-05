@@ -22,10 +22,10 @@ spec:
           gpu:
             type: 'nvidia'
             number: 2
-    persistentVolume:
-      enabled: true
-      size: "250Gi"
-      storageClass: "nfs-client"
+        persistentVolume:
+          enabled: true
+          size: "250Gi"
+          storageClass: "nfs-client"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: ollama
