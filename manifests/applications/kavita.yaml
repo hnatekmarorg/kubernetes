@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kavita
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kavita-config
+  namespace: kavita
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: nfs-client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kavita-deployment
+  namespace: kavita
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+  template:
+    metadata:
+      labels:
+        app: kavita
+    spec:
+      volumes:
+        - name: books-volume
+          nfs:
+            path: /mnt/data/public/books
+            server: 192.168.88.25
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: kavita-config
+      containers:
+        - name: kavita
+          image: jvmilazz0/kavita:latest
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: books-volume
+              mountPath: /books
+            - name: config-volume
+              mountPath: /kavita/config
+          restartPolicy: UnlessStopped
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kavita
+spec:
+  selector:
+    app: kavita
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kavita-ingress
+  namespace: kavita
+spec:
+  ingressClassName: kong
+  rules:
+    - host: books.internal.hnatekmar.xyz
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: kavita
+                port:
+                  number: 5000
