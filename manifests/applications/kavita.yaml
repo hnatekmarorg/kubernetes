@@ -49,7 +49,6 @@ spec:
               mountPath: /books
             - name: config-volume
               mountPath: /kavita/config
-          restartPolicy: UnlessStopped
 ---
 apiVersion: v1
 kind: Service
