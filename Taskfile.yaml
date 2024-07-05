@@ -26,3 +26,4 @@ tasks:
         ARGOCD_PASSWORD=$(kubectl get secret -n argocd argocd-initial-admin-secret -o yaml | grep password | awk '{ print $2 }' | base64 -d) 
         echo "You can login into argocd via admin / $ARGOCD_PASSWORD"
         echo "To access web interface please run 'kubectl port-forward svc/argocd-server -n argocd 8980:443' and then access https://localhost:8980"
+      - kubectl port-forward svc/argocd-server -n argocd 8980:443

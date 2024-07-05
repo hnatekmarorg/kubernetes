@@ -1,3 +1,4 @@
 /bootstrapping/age/key.txt
 manifests/secrets/*
+!manifests/secrets/encrypted
 !manifests/secrets/encrypted/enc.*.yaml
