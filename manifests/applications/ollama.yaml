@@ -27,7 +27,7 @@ spec:
         storageClass: "nfs-client"
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: nfs-provisioner
+    namespace: ollama
   syncOptions:
     - CreateNamespace=true
   syncPolicy:
