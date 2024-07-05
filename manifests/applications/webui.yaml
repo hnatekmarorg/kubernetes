@@ -27,7 +27,7 @@ spec:
           - name: WEBUI_AUTH
             value: "False"
         ingress:
-          host: "webui-internal.hnatekmar.xyz"
+          host: "webui.internal.hnatekmar.xyz"
           class: "kong"
           enabled: true
         persistence:
