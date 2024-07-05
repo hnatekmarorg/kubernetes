@@ -8,9 +8,12 @@ spec:
   source:
     chart: ingress
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-    targetRevision: 4.0.18
     helm:
       releaseName: nfs-subdir-external-provisioner
+    valuesObject:
+      nfs:
+        server: 192.168.88.25
+        path: /mnt/data/k8s
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nfs-provisioner
