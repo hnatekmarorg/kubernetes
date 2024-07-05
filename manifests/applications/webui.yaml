@@ -17,6 +17,8 @@ spec:
     helm:
       releaseName: open-webui
       valuesObject:
+        ollama:
+          enabled: False
         extraEvnVars:
           - name: OLLAMA_BASE_URL
             value: "http://ollama.ollama.svc.cluster.local:11434"
