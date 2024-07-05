@@ -18,7 +18,7 @@ tasks:
         do
           BASE_NAME=$(basename $file)
           echo Encrypting $BASE_NAME
-          sops --age "$(cat ./bootstrapping/age/public.txt)" --encrypted-suffix='Templates' -e "./manifests/secrets/$BASE_NAME"  > ./manifests/secrets/encrypted/$BASE_NAME
+          sops --age "$(cat ./bootstrapping/age/public.txt)" --encrypted-suffix='Templates' -e "./manifests/secrets/$BASE_NAME"  > ./manifests/secrets/encrypted/enc.$BASE_NAME
         done
   argo_info:
     cmds:
