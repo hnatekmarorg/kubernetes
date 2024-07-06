@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     chart: searxng
-    repoURL: https://helm.openwebui.com/
+    repoURL: https://charts.searxng.org
     targetRevision: 1.0.0
     helm:
       releaseName: searxng
