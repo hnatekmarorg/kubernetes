@@ -3,34 +3,6 @@ kind: Namespace
 metadata:
   name: kavita
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: kavita-nfs
-spec:
-  storageClassName: ""
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 192.168.88.25
-    path: /mnt/data/k8s/kavita
-  persistentVolumeReclaimPolicy: Retain
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: kavita-config
-  namespace: kavita
-spec:
-  accessModes:
-    - ReadWriteMany
-  volumeName: kavita
-  resources:
-    requests:
-      storage: 100Mi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,8 +24,9 @@ spec:
             path: /mnt/data/public/books
             server: 192.168.88.25
         - name: config-volume
-          persistentVolumeClaim:
-            claimName: kavita-config
+          nfs:
+            path: /mnt/data/k8s/kavita
+            server: 192.168.88.25
       containers:
         - name: kavita
           image: jvmilazz0/kavita:latest
