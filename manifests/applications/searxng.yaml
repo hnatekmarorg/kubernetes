@@ -19,6 +19,14 @@ spec:
       valuesObject:
         env:
           TZ: "Europe/Prague"
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: kong
+            hosts:
+              - path: /
+                pathType: Prefix
+                host: serxng.internal.hnatekmar.xyz
   destination:
     server: "https://kubernetes.default.svc"
     namespace: searxng
