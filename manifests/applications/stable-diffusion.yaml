@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: stable-diffusion
       valuesObject:
-        nodeSelector: {}
+        nodeSelector: null
         ingress:
           enabled: true
           className: "kong"
