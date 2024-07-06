@@ -26,8 +26,8 @@ spec:
       volumes:
         - name: base
           nfs:
-            path: 192.168.88.25
-            server: /mnt/data/k8s/stable-diffusion
+            server: 192.168.88.25
+            path: /mnt/data/k8s/stable-diffusion
       containers:
         - name: stable-diffusion
           image: universonic/comfyui
