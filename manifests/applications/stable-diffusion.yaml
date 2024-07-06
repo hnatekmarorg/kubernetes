@@ -18,6 +18,7 @@ spec:
   template:
     metadata:
       name: stable-diffusion
+      namespace: stable-diffusion
       labels:
         app: stable-diffusion
     spec:
