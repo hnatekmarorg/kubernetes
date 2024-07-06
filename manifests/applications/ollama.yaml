@@ -3,6 +3,19 @@ kind: Namespace
 metadata:
   name: ollama
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 250Gi
+  storageClassName: nfs-client
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -24,7 +37,7 @@ spec:
             number: 2
         persistentVolume:
           enabled: true
-          size: "250Gi"
+          existingClaim: "ollama-pvc"
           storageClass: "nfs-client"
   destination:
     server: "https://kubernetes.default.svc"
