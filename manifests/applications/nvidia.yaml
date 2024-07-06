@@ -18,6 +18,7 @@ spec:
     helm:
       releaseName: nvidia-device-plugin
       valuesObject:
+        runtimeClassName: nvidia
         gfd:
           enabled: true
         nfs:
