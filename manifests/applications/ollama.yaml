@@ -16,6 +16,7 @@ spec:
   nfs:
     server: 192.168.88.25
     path: /mnt/data/k8s/ollama
+  persistentVolumeReclaimPolicy: Retain
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
