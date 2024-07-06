@@ -3,6 +3,36 @@ kind: Namespace
 metadata:
   name: webui
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: webui-nfs
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.25
+    path: /mnt/data/k8s/webui
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: webui-pvc
+  namespace: webui
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeMode: Filesystem
+  storageClassName: ""
+  volumeName: webui-nfs
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -32,7 +62,7 @@ spec:
           enabled: true
         persistence:
           enabled: true
-          storageClass: "nfs-client"
+          existingClaim: "webui-pvc"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: webui
