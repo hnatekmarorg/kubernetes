@@ -3,41 +3,47 @@ kind: Namespace
 metadata:
   name: stable-diffusion
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: stable-diffusion
-  namespace: argocd
+  labels:
+    app: stable-diffusion
 spec:
-  project: default
-  source:
-    chart: stable-diffusion
-    repoURL: https://amithkk.github.io/stable-diffusion-k8s
-    targetRevision: 1.0.6
-    helm:
-      releaseName: stable-diffusion
-      valuesObject:
-        nodeSelector: null
-        ingress:
-          enabled: true
-          className: "kong"
-          hosts:
-            - host: stable-diffusion.internal.hnatekmar.xyz
-              paths:
-                - path: /
-                  pathType: ImplementationSpecific
-        persistence:
-          storageClass: "nfs-client"
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: stable-diffusion
-  syncPolicy:
-    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
-      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
-      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
-      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
-    syncOptions:
-      - CreateNamespace=true
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stable-diffusion
+  template:
+    metadata:
+      name: stable-diffusion
+      labels:
+        app: stable-diffusion
+    spec:
+      runtimeClassName: "nvidia"
+      volumes:
+        - name: base
+          nfs:
+            path: 192.168.88.25
+            server: /mnt/data/k8s/stable-diffusion
+      containers:
+        - name: stable-diffusion
+          image: universonic/comfyui
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /app/comfyui/models/checkpoints
+              name: base
+              subPath: checkpoints
+            - mountPath: /app/comfyui/output
+              name: base
+              subPath: output
+            - mountPath: /app/comfyui/input
+              name: base
+              subPath: input
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
