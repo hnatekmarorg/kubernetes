@@ -17,6 +17,15 @@ spec:
     helm:
       releaseName: stable-diffusion
       valuesObject:
+        nodeSelector: {}
+        ingress:
+          enabled: true
+          className: "kong"
+          hosts:
+            - host: stable-diffusion.internal.hnatekmar.xyz
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
         persistence:
           storageClass: "nfs-client"
         resources:
