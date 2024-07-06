@@ -13,7 +13,7 @@ spec:
   source:
     chart: telegraf
     repoURL: https://helm.influxdata.com/
-    targetRevision: 1.4.0
+    targetRevision: 1.8.50
     helm:
       releaseName: telegraf-operator
       valuesObject:
