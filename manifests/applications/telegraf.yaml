@@ -54,6 +54,7 @@ spec:
       labels:
         app: telegraf
     spec:
+      hostNetwork: true # for hostname of node
       containers:
         - name: telegraf
           image: telegraf:1.31.1
