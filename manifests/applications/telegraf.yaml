@@ -39,3 +39,50 @@ spec:
       allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: telegraf
+  namespace: telegraf
+spec:
+  selector:
+    matchLabels:
+      app: telegraf
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      containers:
+        - name: telegraf
+          image: telegraf/telegraf:1.23.0
+          command: ["telegraf", "--config", "/etc/telegraf/telegraf.conf"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/telegraf
+            - name: data-volume
+              mountPath: /var/lib/telegraf
+      volumes:
+        - name: config-volume
+          configMap:
+            name: telegraf-config
+        - name: data-volume
+          emptyDir: {}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-config
+  namespace: telegraf
+data:
+  telegraf.conf: |
+    [[inputs.mem]]
+    [[inputs.cpu]]
+    [[inputs.disk]]
+    [[inputs.net]]
+    [[outputs.influxdb_v2]]
+      urls = ["https://172.16.100.31:8086"]
+      token = "my-super-secret-auth-token"
+      organization = "homelab"
+      bucket = "default"

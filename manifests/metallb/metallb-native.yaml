@@ -1654,7 +1654,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /metrics
-            port: monitoring
+            port: caddy
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
@@ -1662,7 +1662,7 @@ spec:
         name: controller
         ports:
         - containerPort: 7472
-          name: monitoring
+          name: caddy
         - containerPort: 9443
           name: webhook-server
           protocol: TCP
@@ -1670,7 +1670,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /metrics
-            port: monitoring
+            port: caddy
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
@@ -1747,7 +1747,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /metrics
-            port: monitoring
+            port: caddy
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
@@ -1755,7 +1755,7 @@ spec:
         name: speaker
         ports:
         - containerPort: 7472
-          name: monitoring
+          name: caddy
         - containerPort: 7946
           name: memberlist-tcp
         - containerPort: 7946
@@ -1765,7 +1765,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /metrics
-            port: monitoring
+            port: caddy
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1

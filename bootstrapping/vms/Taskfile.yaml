@@ -1,0 +1,13 @@
+version: 3
+
+tasks:
+  default: # Builds all butane configs and starts http server
+    watch: true
+    cmds:
+      - cmd: |
+          for folder in $(ls -d */);
+          do
+            echo Generating $folder
+            cat $folder/butane.yaml | docker run --rm -v $(pwd):/code -i quay.io/coreos/butane:latest --files-dir /code > $folder/ignition.json
+          done
+          python -m http.server

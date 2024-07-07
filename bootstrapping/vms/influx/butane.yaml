@@ -1,0 +1,84 @@
+variant: flatcar
+version: 1.0.0
+
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFPly2MYEeh4FtFtftOa0qasGW4VNIzYv/ZzheQ/dFs martin@fedora
+
+storage:
+  files:
+    - path: /etc/telegraf/telegraf.conf
+      mode: 0600
+      contents:
+        inline: |
+          [[inputs.mem]]
+          [[inputs.cpu]]
+          [[inputs.disk]]
+          [[inputs.net]]
+          [[outputs.influxdb_v2]]
+            urls = ["https://172.16.100.31:8086"]
+            token = "my-super-secret-auth-token"
+            organization = "homelab"
+            bucket = "default"
+          
+
+    - path: /etc/influxdb/init_influx.sh
+      mode: 0600
+      contents:
+        inline: |
+          docker rm -f influx || true
+          docker rm -f telegraf || true
+          
+          docker run --name telegraf -d --name=telegraf \
+          --network host \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v /etc/telegraf:/etc/telegraf \
+          telegraf
+          
+          docker run -t --name=influx \
+          --network host \
+          -v influxconfig:/etc/influxdb \
+          -v influxdb:/var/lib/influxdb \
+          -e DOCKER_INFLUXDB_INIT_MODE=setup \
+          -e DOCKER_INFLUXDB_INIT_USERNAME=root \
+          -e DOCKER_INFLUXDB_INIT_PASSWORD=supersecretpassword \
+          -e DOCKER_INFLUXDB_INIT_ORG=homelab \
+          -e DOCKER_INFLUXDB_INIT_BUCKET=default \
+          -e DOCKER_INFLUXDB_INIT_RETENTION=1w \
+          -e DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-super-secret-auth-token \
+          influxdb:latest
+
+    - path: /etc/hostname
+      contents:
+        inline: monitoring.hnatekmar.xyz
+
+    - path: /etc/systemd/network/eth0.network
+      mode: 0644
+      contents:
+        inline: |
+          [Match]
+          Name=eth0
+
+          [Network]
+          Address=172.16.100.31/24
+          Gateway=172.16.100.1
+          DNS=8.8.8.8
+
+systemd:
+  units:
+    - name: influx.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=InfluxDB
+        After=network-online.target
+
+        [Service]
+        ExecStart=/bin/bash /etc/influxdb/init_influx.sh
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target
+

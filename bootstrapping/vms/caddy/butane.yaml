@@ -1,0 +1,97 @@
+variant: flatcar
+version: 1.0.0
+
+ignition:
+  config:
+    merge:
+      - local: telegraf.yaml
+      - local: ssh.yaml
+
+storage:
+  files:
+    - path: /etc/caddy/Dockerfile
+      contents:
+        inline: |
+          ARG CADDY_VERSION=2
+          FROM caddy:${CADDY_VERSION}-builder AS builder
+          RUN xcaddy build \
+              --with github.com/caddy-dns/porkbun
+          FROM caddy:${CADDY_VERSION}-alpine
+          COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+          ENTRYPOINT ["caddy"]
+    - path: /etc/caddy/.env
+      contents:
+        inline: |
+          PORKBUN_API_KEY=
+          PORKBUN_API_SECRET_KEY=
+
+    - path: /etc/caddy/init_caddy.sh
+      mode: 0600
+      contents:
+        inline: |
+          cd /etc/caddy
+          docker rm /caddy -f | exit 0
+          docker build . --network host -t caddy-runtime
+          docker run --network host --env-file .env --name caddy -v caddy_data:/data -v /etc/caddy:/etc/caddy caddy-runtime run --config /etc/caddy/Caddyfile
+
+    - path: /etc/caddy/Caddyfile
+      mode: 0600
+      contents:
+        inline: |
+          *.hnatekmar.xyz {
+            tls internal
+            reverse_proxy 172.16.100.21
+          }
+          algovector.com {
+              reverse_proxy 172.16.100.111:3000
+              tls {
+                dns porkbun {
+                    api_key {env.PORKBUN_API_KEY}
+                    api_secret_key {env.PORKBUN_API_SECRET_KEY}
+                }
+              }
+          }
+
+          dev.algovector.com {
+              reverse_proxy 172.16.100.21
+              tls {
+                dns porkbun {
+                    api_key {env.PORKBUN_API_KEY}
+                    api_secret_key {env.PORKBUN_API_SECRET_KEY}
+                }
+              }
+          }
+
+
+    - path: /etc/hostname
+      contents:
+        inline: caddy.hnatekmar.xyz
+
+    - path: /etc/systemd/network/eth0.network
+      mode: 0644
+      contents:
+        inline: |
+          [Match]
+          Name=eth0
+
+          [Network]
+          Address=172.16.100.30/24
+          Gateway=172.16.100.1
+          DNS=8.8.8.8
+
+systemd:
+  units:
+    - name: caddy.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Caddy
+        After=network-online.target
+        Requires=network-online.target
+
+        [Service]
+        ExecStart=/usr/bin/bash /etc/caddy/init_caddy.sh
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target

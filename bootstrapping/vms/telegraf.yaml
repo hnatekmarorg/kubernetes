@@ -1,0 +1,42 @@
+storage:
+  files:
+    - path: /usr/bin/telegraf
+      mode: 0755
+      contents:
+        url: https://dl.influxdata.com/telegraf/releases/telegraf-1.31.1_linux_amd64.tar.gz
+        sha256: 10bf98cdf49db62da8e71ab91fadc63ff8a97558488d14750c16567257737faf
+    - path: /etc/telegraf/telegraf.conf
+      mode: 0600
+      contents:
+        inline: |
+          [agent]
+            interval = "1s"
+            round_interval = true
+
+          [[inputs]]
+            [[inputs.influx]]
+              urls = ["http://172.16.100.31:8086"]
+              username = "telegraf"
+              password = "telegraf"
+
+          [[processors]]
+            [[processors.regex]]
+              order = 1
+              [processors.regex.tags]
+                static_tags = ["env=prod"]
+
+systemd:
+  units:
+    - name: telegraf.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Telegraf Agent
+        After=network-online.target
+
+        [Service]
+        ExecStart=/usr/bin/telegraf --config /etc/telegraf/telegraf.conf
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target
