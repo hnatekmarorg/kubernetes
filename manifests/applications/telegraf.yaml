@@ -82,7 +82,7 @@ data:
     [[inputs.disk]]
     [[inputs.net]]
     [[outputs.influxdb_v2]]
-      urls = ["https://172.16.100.31:8086"]
+      urls = ["http://172.16.100.31:8086"]
       token = "my-super-secret-auth-token"
       organization = "homelab"
       bucket = "default"
