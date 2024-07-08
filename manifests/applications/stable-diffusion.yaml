@@ -57,3 +57,22 @@ spec:
       port: 8188
       targetPort: 8188
   type: ClusterIP
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: stable-diffusion
+  namespace: stable-diffusion
+spec:
+  ingressClassName: kong
+  rules:
+    - host: comfyui.internal.hnatekmar.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: stable-diffusion
+                port:
+                  number: 8188
+            pathType: Prefix
+            path: /
