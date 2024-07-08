@@ -47,6 +47,14 @@ spec:
     helm:
       releaseName: ollama
       valuesObject:
+        ingress:
+          enabled: true
+          className: "kong"
+          hosts:
+            - host: ollama.internal.hnatekmar.xyz
+              paths:
+                - path: /
+                  pathType: Prefix
         ollama:
           gpu:
             enabled: true
