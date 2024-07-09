@@ -54,6 +54,7 @@ metadata:
   name: gotify-ingress
   namespace: gotify
 spec:
+  ingressClassName: kong
   rules:
     - host: gotify.hnatekmar.xyz
       http:
