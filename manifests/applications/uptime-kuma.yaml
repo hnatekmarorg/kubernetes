@@ -50,7 +50,7 @@ spec:
       valuesObject:
         volume:
           enabled: true
-          existingClaim: uptime-kuma-pv
+          existingClaim: uptime-kuma-pvc
         ingress:
           className: kong
           enabled: true
