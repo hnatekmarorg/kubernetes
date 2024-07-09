@@ -21,7 +21,7 @@ spec:
         runtimeClassName: nvidia
         gfd:
           enabled: true
-        nfs:
+        nfd:
           enabled: true
   destination:
     server: "https://kubernetes.default.svc"
