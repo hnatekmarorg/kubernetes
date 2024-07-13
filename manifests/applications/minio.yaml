@@ -54,6 +54,7 @@ spec:
           clientSecret: minio-secret
         persistence:
           existingClaim: minio-pvc
+          storageClassName: ""
         ingress:
           ingressClassName: kong
           enabled: true
