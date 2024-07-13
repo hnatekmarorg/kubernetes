@@ -46,7 +46,7 @@ spec:
     targetRevision: 5.2.0
     helm:
       releaseName: minio
-      valueObject:
+      valuesObject:
         replicas: 1
         oidc:
           enabled: true
@@ -54,7 +54,7 @@ spec:
           clientSecret: minio-secret
         persistence:
           existingClaim: minio-pvc
-          size: 500Gi
+          size: 250Gi
         ingress:
           ingressClassName: kong
           enabled: true
