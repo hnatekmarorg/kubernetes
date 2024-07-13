@@ -47,6 +47,7 @@ spec:
     helm:
       releaseName: minio
       valueObject:
+        replicas: 1
         oidc:
           enabled: true
           configUrl: https://authentik.hnatekmar.xyz/application/o/minio/.well-known/openid-configuration
