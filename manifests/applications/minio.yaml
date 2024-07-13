@@ -3,36 +3,6 @@ kind: Namespace
 metadata:
   name: minio
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: minio-nfs
-spec:
-  storageClassName: ""
-  capacity:
-    storage: 250Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 192.168.88.25
-    path: /mnt/data/k8s/minio
-  persistentVolumeReclaimPolicy: Retain
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: minio-pvc
-  namespace: minio
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 250Gi
-  volumeMode: Filesystem
-  storageClassName: ""
-  volumeName: minio-nfs
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -53,8 +23,8 @@ spec:
           configUrl: https://authentik.hnatekmar.xyz/application/o/minio/.well-known/openid-configuration
           clientSecret: minio-secret
         persistence:
-          existingClaim: minio-pvc
-          size: 250Gi
+          storageClass: "nfs-client"
+          size: 500Gi
         ingress:
           ingressClassName: kong
           enabled: true
