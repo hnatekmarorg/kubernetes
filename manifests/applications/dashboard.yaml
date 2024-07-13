@@ -28,7 +28,7 @@ spec:
             server: 192.168.88.25
       containers:
         - name: dashy
-          image: lissy93/dashy
+          image: ghcr.io/gethomepage/homepage:latest
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /app/config
