@@ -1,0 +1,67 @@
+#!ipxe
+
+set menu-timeout 10000
+set config-server http://172.16.100.252:8000
+
+:main_menu
+set menu-default talos_menu
+menu Main
+item talos_menu Talos node
+item vms Various utility vms
+choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
+goto ${selected}
+
+:vms
+menu Various utility vms
+item proxy Reverse proxy
+item monitoring Monitoring stack
+choose --timeout ${menu-timeout} --default proxy selected || goto cancel
+goto ${selected}
+
+:proxy
+set base-url http://stable.release.flatcar-linux.net/amd64-usr/current
+kernel ${base-url}/flatcar_production_pxe.vmlinuz ignition.config.url=${config-server}/caddy_install/ignition.json initrd=flatcar_production_pxe_image.cpio.gz flatcar.first_boot=1
+initrd ${base-url}/flatcar_production_pxe_image.cpio.gz
+boot
+
+
+:talos_menu
+set menu-default master
+menu Talos cluster
+item master Master node
+item worker_cpu CPU worker
+item worker_gpu GPU worker
+choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
+goto ${selected}
+
+:master
+set config_url ${config-server}/controlplane.yaml
+set boot_params talos.config=${config_url} net.ifnames=1 printk.devkmsg=on slab_nomerge pti=on console=ttyS0 console=tty0 init_on_alloc=1 init_on_free=1 consoleblank=0 nvme_core.io_timeout=4294967295 ima_template=ima-ng ima_appraise=fix ima_hash=sha512 talos.platform=metal initrd=initrd.magic ${cmdline}
+set talos_base_url https://pxe.factory.talos.dev/image/c43979d88ecd7c9881b410e0c5f6c4625062912600a27310ee0db3c98dc4b7fc/v1.7.5
+imgfree
+kernel ${talos_base_url}/kernel-amd64 ${boot_params}
+initrd ${talos_base_url}/initramfs-amd64.xz
+boot
+
+
+:worker_cpu
+set config_url ${config-server}/worker.yaml
+set boot_params talos.config=${config_url} net.ifnames=1 printk.devkmsg=on slab_nomerge pti=on console=ttyS0 console=tty0 init_on_alloc=1 init_on_free=1 consoleblank=0 nvme_core.io_timeout=4294967295 ima_template=ima-ng ima_appraise=fix ima_hash=sha512 talos.platform=metal initrd=initrd.magic ${cmdline}
+set talos_base_url https://pxe.factory.talos.dev/image/c43979d88ecd7c9881b410e0c5f6c4625062912600a27310ee0db3c98dc4b7fc/v1.7.5
+imgfree
+kernel ${talos_base_url}/kernel-amd64 ${boot_params}
+initrd ${talos_base_url}/initramfs-amd64.xz
+boot
+
+
+:worker_gpu
+set config_url ${config-server}/worker_gpu.yaml
+set boot_params talos.config=${config_url} net.ifnames=1 printk.devkmsg=on slab_nomerge pti=on console=ttyS0 console=tty0 init_on_alloc=1 init_on_free=1 consoleblank=0 nvme_core.io_timeout=4294967295 ima_template=ima-ng ima_appraise=fix ima_hash=sha512 talos.platform=metal initrd=initrd.magic ${cmdline}
+set talos_base_url https://pxe.factory.talos.dev/image/0412a9a6369c0fb55e913cdfcbf4ad6ca3fab6e56ab71198ec4b58ad7e7a4ddd/v1.7.5
+imgfree
+kernel ${talos_base_url}/kernel-amd64 ${boot_params}
+initrd ${talos_base_url}/initramfs-amd64.xz
+boot
+
+:cancel
+echo "Timeout reached"

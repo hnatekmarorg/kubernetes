@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  pxe:
+    image: ghcr.io/netbootxyz/netbootxyz
+    restart: unless-stopped
+    volumes:
+      - ./menu.ipxe:/config/menus/menu.ipxe
+    ports:
+      - "8080:80"
+      - "69:69/udp"
+      - "3000:3000"
+

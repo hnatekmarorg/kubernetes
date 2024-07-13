@@ -1,14 +1,42 @@
 variant: flatcar
 version: 1.0.0
 
-ignition:
-  config:
-    merge:
-      - local: telegraf.yaml
-      - local: ssh.yaml
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFPly2MYEeh4FtFtftOa0qasGW4VNIzYv/ZzheQ/dFs martin@fedora
 
 storage:
   files:
+    - path: /opt/bin/docker-compose
+      mode: 0777
+      contents:
+        source: https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64
+
+    - path: /etc/authentik/docker-compose.yaml
+      mode: 0600
+      contents:
+        source: https://goauthentik.io/docker-compose.yml
+
+    - path: /etc/authentik/init_authentik.sh
+      mode: 0755
+      contents:
+        inline: |
+          #!/bin/bash
+          cd /etc/authentik
+          
+          if [ ! -f .env ];
+          then
+             echo "Please provide data from backup /mnt/backups/authentik/.env"
+             exit 1
+#            echo "PG_PASS=$(openssl rand 36 | base64 -w 0)" >> .env
+#            echo "AUTHENTIK_SECRET_KEY=$(openssl rand 60 | base64 -w 0)" >> .env
+          fi
+          
+          /opt/bin/docker-compose pull
+          /opt/bin/docker-compose up
+
     - path: /etc/caddy/Dockerfile
       contents:
         inline: |
@@ -25,6 +53,27 @@ storage:
           PORKBUN_API_KEY=
           PORKBUN_API_SECRET_KEY=
 
+    - path: /etc/authentik/restore_backup.sh
+      mode: 0755
+      contents:
+        inline: |
+          #!/bin/bash
+          cd /etc/authentik
+          cat /mnt/backups/authentik/.env > .env
+          docker exec -i authentik-postgresql-1 psql -U authentik -d authentik < /mnt/backups/$(ls -t /mnt/backups | head -n 1)
+
+    - path: /etc/authentik/backup.sh
+      mode: 0755
+      contents:
+        inline: |
+          #!/bin/bash
+          cd /etc/authentik
+          mkdir -p /mnt/backups
+          mount -t nfs truenas.hnatekmar.xyz:/mnt/data/backups /mnt/backups
+          mkdir -p /mnt/backups/authentik
+          cat .env > /mnt/backups/authentik/.env
+          docker exec authentik-postgresql-1 pg_dump -U authentik -d authentik > /mnt/backups/authentik/$(date +%Y-%m-%d).sql
+
     - path: /etc/caddy/init_caddy.sh
       mode: 0600
       contents:
@@ -38,23 +87,31 @@ storage:
       mode: 0600
       contents:
         inline: |
-            *.*.hnatekmar.xyz {
-              tls internal
-              respond * "Access denied" 403
+          *.*.hnatekmar.xyz {
+            tls internal
+            respond * "Access denied" 403
+          }
+          *.hnatekmar.xyz {
+            tls internal
+            reverse_proxy /outpost.goauthentik.io/* http://localhost:9000
+            forward_auth http://localhost:9000 {
+               uri /outpost.goauthentik.io/auth/caddy
+                # capitalization of the headers is important, otherwise they will be empty
+                copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+                # optional, in this config trust all private ranges, should probably be set to the outposts IP
+                trusted_proxies private_ranges
             }
-            *.hnatekmar.xyz {
-              tls internal
-              reverse_proxy 172.16.100.21
-            }
-            algovector.com {
-              reverse_proxy 172.16.100.111:3000
-              tls {
-                dns porkbun {
-                  api_key {env.PORKBUN_API_KEY}
-                  api_secret_key {env.PORKBUN_API_SECRET_KEY}
-                }
+            reverse_proxy 172.16.100.21
+          }
+          algovector.com {
+            reverse_proxy 172.16.100.111:3000
+            tls {
+              dns porkbun {
+                api_key {env.PORKBUN_API_KEY}
+                api_secret_key {env.PORKBUN_API_SECRET_KEY}
               }
             }
+          }
 
     - path: /etc/hostname
       contents:
@@ -81,10 +138,45 @@ systemd:
         Description=Caddy
         After=network-online.target
         Requires=network-online.target
-
+        
         [Service]
         ExecStart=/usr/bin/bash /etc/caddy/init_caddy.sh
         Restart=always
+        
+        [Install]
+        WantedBy=multi-user.target
 
+    # Cron service that automatically backups the /etc/authentik directory to the NFS share
+    - name: backups.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Backups
+        After=network-online.target
+        Requires=network-online.target
+        
+        [Timer]
+        OnCalendar=daily
+        Persistent=true
+        
+        [Service]
+        ExecStart=/usr/bin/bash /etc/authentik/backup.sh
+        Restart=always
+        
+        [Install]
+        WantedBy=multi-user.target
+
+    - name: authentik.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Authentik
+        After=network-online.target
+        Requires=network-online.target
+        
+        [Service]
+        ExecStart=/usr/bin/bash /etc/authentik/init_authentik.sh
+        Restart=always
+        
         [Install]
         WantedBy=multi-user.target

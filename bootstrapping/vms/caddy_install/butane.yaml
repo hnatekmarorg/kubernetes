@@ -1,0 +1,37 @@
+variant: flatcar
+version: 1.0.0
+
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDFPly2MYEeh4FtFtftOa0qasGW4VNIzYv/ZzheQ/dFs martin@fedora
+
+storage:
+  filesystems:
+    - device: /dev/sda
+      format: ext4
+      wipe_filesystem: true
+      label: root
+
+  files:
+    - path: /opt/ignition.json
+      mode: 0777
+      contents:
+        source: http://172.16.100.252:8000/caddy/ignition.json
+
+systemd:
+  units:
+   - name: installer.service
+     enabled: true
+     contents: |
+        [Unit]
+        Requires=network-online.target
+        After=network-online.target
+        [Service]
+        Type=forking
+        TimeoutStartSec=600
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/sh -c "flatcar-install -d /dev/sda -i /opt/ignition.json && udevadm settle && systemctl reboot"
+        [Install]
+        WantedBy=multi-user.target

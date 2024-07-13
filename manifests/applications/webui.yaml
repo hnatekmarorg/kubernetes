@@ -56,8 +56,26 @@ spec:
             value: "http://ollama.ollama.svc.cluster.local:11434"
           - name: WEBUI_AUTH
             value: "False"
+          - name: OLLAMA_BASE_URL
+            value: http://ollama.ollama.svc.cluster.local:11434
+          - name: ENABLE_OAUTH_SIGNUP
+            value: "true"
+          - name: OAUTH_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: webui-secret
+                key: OAUTH_CLIENT_ID
+          - name: OAUTH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: webui-secret
+                key: OAUTH_CLIENT_SECRET
+          - name: OPENID_PROVIDER_URL
+            value: https://authentik.hnatekmar.xyz/application/o/webui/.well-known/openid-configuration
+          - name: WEBUI_AUTH
+            value: "true"
         ingress:
-          host: "webui.internal.hnatekmar.xyz"
+          host: "webui.hnatekmar.xyz"
           class: "kong"
           enabled: true
         persistence:
