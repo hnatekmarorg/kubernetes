@@ -42,7 +42,7 @@ spec:
   project: default
   source:
     chart: minio
-    repoURL: https://otwld.github.io/ollama-helm
+    repoURL: https://charts.min.io/
     targetRevision: 5.2.0
     helm:
       releaseName: minio
