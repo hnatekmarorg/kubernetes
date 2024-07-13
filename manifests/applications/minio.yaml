@@ -55,6 +55,8 @@ spec:
         persistence:
           existingClaim: minio-pvc
           storageClassName: ""
+          size: 1500Gi
+          accessMode: ReadWriteMany
         ingress:
           ingressClassName: kong
           enabled: true
