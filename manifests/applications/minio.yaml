@@ -54,7 +54,7 @@ spec:
           clientSecret: minio-secret
         persistence:
           existingClaim: minio-pvc
-          storageClass: "minio"
+          storageClass: ""
           size: 1500Gi
           accessMode: ReadWriteMany
         ingress:
