@@ -54,8 +54,8 @@ spec:
           clientSecret: minio-secret
         persistence:
           existingClaim: minio-pvc
-          storageClass: ""
-          size: 1500Gi
+          storageClass: "nfs-client"
+          size: 500Gi
           accessMode: ReadWriteMany
         ingress:
           ingressClassName: kong
