@@ -47,16 +47,10 @@ spec:
     helm:
       releaseName: grafana
       valuesObject:
+        server:
+          root_url: https://grafana.hnatekmar.xyz
         replicas: 1
         mode: standalone
-        oidc:
-          enabled: true
-          configUrl: https://authentik.hnatekmar.xyz/application/o/minio/.well-known/openid-configuration
-          redirectUri: https://minio.hnatekmar.xyz/oauth_callback
-          existingClientSecretName: minio-secret
-          scopes: "openid,email,profile,minio"
-          existingClientSecretKey: "clientSecret"
-          existingClientIdKey: "clientId"
         persistence:
           enabled: true
           existingClaim: grafana-pvc
