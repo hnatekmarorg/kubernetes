@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dashy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashy
+  labels:
+    app: dashy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashy
+  template:
+    metadata:
+      name: dashy
+      labels:
+        app: dashy
+    spec:
+      volumes:
+        - name: nfs
+          nfs:
+            path: /mnt/data/k8s/ollama
+            server: 192.168.88.25
+      containers:
+        - name: dashy
+          image: lissy93/dashy
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /app/user-data
+              name: nfs
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashy
+  namespace: dashy
+spec:
+  selector:
+    app: dashy
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
