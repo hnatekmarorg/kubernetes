@@ -3,6 +3,21 @@ kind: Namespace
 metadata:
   name: minio
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-nfs
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 250Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.25
+    path: /mnt/data/k8s/minio
+  persistentVolumeReclaimPolicy: Retain
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -17,24 +32,34 @@ spec:
     helm:
       releaseName: minio
       valuesObject:
+        securityContext:
+          enabled: true
+          fsGroup: 0
+          runAsUser: 0
         replicas: 1
+        mode: standalone
         oidc:
           enabled: true
           configUrl: https://authentik.hnatekmar.xyz/application/o/minio/.well-known/openid-configuration
-          clientSecret: minio-secret
+          redirectUri: https://minio.hnatekmar.xyz/oauth_callback
+          existingClientSecretName: minio-secret
+          scopes: "openid,email,profile,minio"
+          existingClientSecretKey: "clientSecret"
+          existingClientIdKey: "clientId"
         persistence:
-          storageClass: "nfs-client"
-          size: 500Gi
+          volumeName: minio-nfs
+          accessMode: ReadWriteMany
+          size: 250Gi
         ingress:
           ingressClassName: kong
           enabled: true
           hosts:
-            - minio.hnatekmar.xyz
+            - console-minio.hnatekmar.xyz
         consoleIngress:
           ingressClassName: kong
           enabled: true
           hosts:
-            - console-minio.hnatekmar.xyz
+            - minio.hnatekmar.xyz
   destination:
     server: "https://kubernetes.default.svc"
     namespace: minio

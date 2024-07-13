@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-nfs
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.25
+    path: /mnt/data/k8s/grafana
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-pvc
+  namespace: grafana
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  storageClassName: ""
+  volumeName: grafana-nfs
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: grafana
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 8.3.4
+    helm:
+      releaseName: grafana
+      valuesObject:
+        replicas: 1
+        mode: standalone
+        oidc:
+          enabled: true
+          configUrl: https://authentik.hnatekmar.xyz/application/o/minio/.well-known/openid-configuration
+          redirectUri: https://minio.hnatekmar.xyz/oauth_callback
+          existingClientSecretName: minio-secret
+          scopes: "openid,email,profile,minio"
+          existingClientSecretKey: "clientSecret"
+          existingClientIdKey: "clientId"
+        persistence:
+          enabled: true
+          existingClaim: grafana-pvc
+          accessModes:
+           - ReadWriteMany
+          size: 10Gi
+        ingress:
+          ingressClassName: kong
+          enabled: true
+          hosts:
+            - grafana.hnatekmar.xyz
+        extraSecretMounts:
+          - name: auth-generic-oauth-secret-mount
+            secretName: auth-generic-oauth-secret
+            defaultMode: 0440
+            mountPath: /etc/secrets/auth_generic_oauth
+            readOnly: true
+        grafana.ini:
+          auth:
+            signout_redirect_url: "https://authentik.hnatekmar.xyz/application/o/grafana/end-session/"
+            oauth_auto_login: true
+          auth.generic_oauth:
+            name: authentik
+            enabled: true
+            client_id: "$__file{/etc/secrets/auth_generic_oauth/client_id}"
+            client_secret: "$__file{/etc/secrets/auth_generic_oauth/client_secret}"
+            scopes: "openid profile email"
+            auth_url: "https://authentik.hnatekmar.xyz/application/o/authorize/"
+            token_url: "https://authentik.hnatekmar.xyz/application/o/token/"
+            api_url: "https://authentik.hnatekmar.xyz/application/o/userinfo/"
+#            # Optionally map user groups to Grafana roles
+#            role_attribute_path: contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: grafana
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:
+      - CreateNamespace=true
