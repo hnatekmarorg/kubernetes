@@ -24,7 +24,7 @@ spec:
       volumes:
         - name: nfs
           nfs:
-            path: /mnt/data/k8s/ollama
+            path: /mnt/data/k8s/dashy
             server: 192.168.88.25
       containers:
         - name: dashy
