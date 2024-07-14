@@ -19,8 +19,11 @@ spec:
       valuesObject:
         classes:
           data: |
-            [[outputs.influxdb]]
-            urls = ["http://influxdb.influxdb:8086"]
+            [[outputs.influxdb_v2]]
+            urls = ["http://172.16.100.31:8086"]
+            token = "my-super-secret-auth-token"
+            organization = "homelab"
+            bucket = "default"
             [[inputs.linux_cpu]]
             [[inputs.disk]]
             [[inputs.diskio]]
