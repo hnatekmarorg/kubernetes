@@ -51,7 +51,7 @@ spec:
           enabled: true
           className: "kong"
           hosts:
-            - host: ollama.internal.hnatekmar.xyz
+            - host: ollama.hnatekmar.xyz
               paths:
                 - path: /
                   pathType: Prefix
