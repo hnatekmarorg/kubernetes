@@ -17,10 +17,11 @@ spec:
     helm:
       releaseName: kong
       valuesObject:
-        prefixDir:
-          sizeLimit: 10Gi
-        tmpDir:
-          sizeLimit: 10Gi
+        deployment:
+          prefixDir:
+            sizeLimit: 10Gi
+          tmpDir:
+            sizeLimit: 10Gi
 
   destination:
     server: "https://kubernetes.default.svc"
