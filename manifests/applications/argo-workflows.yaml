@@ -29,7 +29,7 @@ spec:
             enabled: true
             rbac:
               enabled: false
-            issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows/.well-known/openid-configuration
+            issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows
             clientId:
               name: argo-server-sso
               key: clientid
