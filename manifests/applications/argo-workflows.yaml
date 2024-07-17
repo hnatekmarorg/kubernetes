@@ -31,7 +31,7 @@ spec:
             enabled: true
             rbac:
               enabled: false
-            issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows
+            issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows/
             clientId:
               name: argo-server-sso
               key: clientid
