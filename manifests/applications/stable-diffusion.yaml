@@ -66,7 +66,7 @@ metadata:
 spec:
   ingressClassName: kong
   rules:
-    - host: comfyui.internal.hnatekmar.xyz
+    - host: comfyui.hnatekmar.xyz
       http:
         paths:
           - backend:
