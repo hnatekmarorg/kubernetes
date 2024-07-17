@@ -26,6 +26,7 @@ spec:
           sso:
             enabled: true
             issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows/
+            userInfoPath: https://authentik.hnatekmar.xyz/application/o/argoworkflows/.well-known/openid-configuration
             clientId:
               name: argo-server-sso
               key: clientid
