@@ -20,7 +20,7 @@ spec:
         server:
           ingress:
             enabled: true
-            ingresClassName: kong
+            ingressClassName: kong
             hosts:
               - argoworkflows.hnatekmar.xyz
           sso:
