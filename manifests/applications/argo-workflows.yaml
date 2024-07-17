@@ -17,6 +17,9 @@ spec:
     helm:
       releaseName: argo-workflows
       valuesObject:
+        workflow:
+          serviceAccount:
+            create: true
         server:
           authMode: sso
           ingress:
