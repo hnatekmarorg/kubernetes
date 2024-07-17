@@ -18,14 +18,13 @@ spec:
       releaseName: argo-workflows
       valuesObject:
         server:
+          authMode: sso
           ingress:
             enabled: true
             ingressClassName: kong
             hosts:
               - argoworkflows.hnatekmar.xyz
           sso:
-            authModes:
-              - sso
             enabled: true
             rbac:
               enabled: false
