@@ -24,6 +24,8 @@ spec:
             hosts:
               - argoworkflows.hnatekmar.xyz
           sso:
+            authModes:
+              - sso
             enabled: true
             issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows/
             userInfoPath: https://authentik.hnatekmar.xyz/application/o/argoworkflows/.well-known/openid-configuration
