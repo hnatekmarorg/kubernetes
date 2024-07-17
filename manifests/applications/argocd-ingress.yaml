@@ -4,7 +4,7 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
 spec:
-  ingressClassName: nginx
+  ingressClassName: kong
   rules:
     - host: argocd.hnatekmar.xyz
       http:
