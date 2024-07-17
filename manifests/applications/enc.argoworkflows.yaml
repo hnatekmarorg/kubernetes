@@ -1,0 +1,33 @@
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+    name: argo-workflows
+    namespace: argo-workflows
+spec:
+    # suspend reconciliation of the sops secret object
+    suspend: false
+    secretTemplates:
+        - name: ENC[AES256_GCM,data:trwXHTmOYJfH34eG7fsz,iv:67ZTiur7qVQmmaUZ4C+11aZgVp9DDCkS4ICZn7X+4vk=,tag:tZOiEns48ZtIPQxH7ZdAPQ==,type:str]
+          stringData:
+            clientid: ENC[AES256_GCM,data:Z56cfuHZBAGkp+JByF+kbCe3uz21Zfht2HtEf3On7ws2xQU659hGIw==,iv:CqX2X+x9VZcOL3/Nq5pX2/D/zb8oxOO5S4t0K55AYR0=,tag:zCE2qpdnJL5MQXmP9FjAEw==,type:str]
+            clientsecret: ENC[AES256_GCM,data:YhpEqzLZewz95+0DNDTuWx93HBvBUMCqrMmp00EBphaELTuYKKm05V90ROo44Vw/VNKYteyVwbz4QT6nyzUqwCSuR8wWognBDTtWXtFwhGiWvBa71Pj1xX6XUbv4QVbPhPQ70o00qQqW9asH2IjfANc4Xa7pwoSegoUQrBnunVs=,iv:695TmKo0YnExvFET9hDeB0ZPyaHAMdzLfaRWHOOIw/0=,tag:UE7T11UjHZumgGlVNnvKzQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYN2kzU0wwaERYMGhySUVz
+            aTg0RzEydjdLbFdndkFSNUFHU2NadGNYMDJRCkYrb010Uk5SYTdNNmVrRWF1Ynk3
+            czJJZkZKS1Q1aURxVDFjRUFuRjVObFEKLS0tIFUvZ2lRMDZKZVlZUkRIYk14eUhi
+            d1B6SUhHUkk0Zm40eU45ODBTUmFyZVUK/0Djl8VSnouL9sMT2LO0REOGw6YXbB6c
+            d5AaByhxWZX+GURk9vnqpmXSp7gUjz0+ObP49Lb5Z9JmLUOKYcPFnQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-17T20:22:39Z"
+    mac: ENC[AES256_GCM,data:S/fbit/2B1MKuwz1xLpIe2pMZUSGAUvfxU+LUkk+noimChfohv0p3CnQ8i+jLiChgJMJWAEYWK7O6v/JjTy8lLvtOEpkRUe+ySLCLXxnS4c+26b4mJ5dOI1jNqCg3dCJ3KdPNGTatN1J4SljSliZhlX3xEuoqmJcVQPHu+t6f18=,iv:qdkxKcjkZvwFle/X7f6M9rw7ejSAqDQHgf9RZjnVCTw=,tag:cc7ouAcjY6DdRP0w9bObkQ==,type:str]
+    pgp: []
+    encrypted_suffix: Templates
+    version: 3.8.1

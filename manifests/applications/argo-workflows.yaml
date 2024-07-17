@@ -16,6 +16,26 @@ spec:
     targetRevision: 0.41.11
     helm:
       releaseName: argo-workflows
+      valuesObject:
+        ingress:
+          enabled: true
+          ingresClassName: kong
+          hosts:
+            - argoworkflows.hnatekmar.xyz
+        sso:
+          enabled: true
+          issuer: https://authentik.hnatekmar.xyz/application/o/argoworkflows/
+          clientId:
+            name: argo-server-sso
+            key: clientid
+          clientSecret:
+            name: argo-server-sso
+            key: clientsecret
+          scopes:
+            - email
+            - openid
+            - profile
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argo-workflows
