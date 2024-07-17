@@ -21,6 +21,7 @@ RUN apt-get update && \
     systemd \
     systemd-sysv \
     unzip \
+    tmux \
     vim \
     wget \
     rsync && \
