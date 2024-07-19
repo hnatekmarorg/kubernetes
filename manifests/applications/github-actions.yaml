@@ -12,10 +12,10 @@ spec:
   project: default
   source:
     chart: arc
-    repoURL: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+    repoURL: ghcr.io/actions/actions-runner-controller-charts
     targetRevision: 0.9.3
     helm:
-      releaseName: arc
+      releaseName: gha-runner-scale-set
       valuesObject:
         githubConfigUrl: "https://github.com/hnatekmarorg"
         githubConfigSecret: "github-token"
