@@ -11,11 +11,11 @@ metadata:
 spec:
   project: default
   source:
-    chart: gha-runner-scale-set
+    chart: gha-runner-scale-set-controller
     repoURL: ghcr.io/actions/actions-runner-controller-charts
     targetRevision: 0.9.3
     helm:
-      releaseName: gha-runner-scale-set
+      releaseName: gha-runner-scale-set-controller
       valuesObject:
         githubConfigUrl: "https://github.com/hnatekmarorg"
         githubConfigSecret: "github-token"
