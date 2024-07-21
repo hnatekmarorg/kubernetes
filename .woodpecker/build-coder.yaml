@@ -12,3 +12,4 @@ steps:
       password: ${DOCKER_PASSWORD}
       context: coder
       dockerfile: nvidia.Dockerfile
+      dry_run: false
