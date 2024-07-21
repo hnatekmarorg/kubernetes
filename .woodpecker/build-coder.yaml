@@ -4,10 +4,8 @@ steps:
     environment:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
-      RENOVATE_TOKEN: $RENOVATE_TOKEN
       LOG_LEVEL: debug
     entrypoint:
-      - export RENOVATE_TOKEN=$RENOVATE_TOKEN
       - docker-entrypoint.sh
     commands:
       - Hnatekmar/kubernetes
