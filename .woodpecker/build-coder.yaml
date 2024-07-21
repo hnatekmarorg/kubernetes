@@ -6,6 +6,8 @@ steps:
       RENOVATE_PLATFORM: "github"
       RENOVATE_TOKEN: $RENOVATE_TOKEN
       LOG_LEVEL: debug
+    commands:
+      - Hnatekmar/kubernetes
     when:
       cron: "renovate"
   - name: build
