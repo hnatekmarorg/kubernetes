@@ -6,6 +6,8 @@ steps:
       RENOVATE_PLATFORM: "github"
       RENOVATE_TOKEN: $RENOVATE_TOKEN
       LOG_LEVEL: debug
+    entrypoint:
+      - docker-entrypoint.sh
     commands:
       - Hnatekmar/kubernetes
     when:
