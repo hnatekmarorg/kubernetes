@@ -29,6 +29,7 @@ spec:
             WOODPECKER_OPEN: "true"
             WOODPECKER_HOST: "https://woodpecker.hnatekmar.xyz"
             WOODPECKER_GITHUB: "true"
+            WOODPECKER_ADMIN: "Hnatekmar"
           extraSecretNamesForEnvFrom:
             - woodpecker-agent
             - woodpecker-github-secret
