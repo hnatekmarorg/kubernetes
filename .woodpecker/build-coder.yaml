@@ -1,25 +1,24 @@
-when:
-  - event: push
-    branch: main
-
 steps:
   - name: renovate
     image: ghcr.io/renovatebot/renovate:latest
     environment:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
-      RENOVATE_TOKEN: ${RENOVATE_TOKEN}
-      GITHUB_COM_TOKEN: ${RENOVATE_TOKEN}
+      RENOVATE_TOKEN: $RENOVATE_TOKEN
+      GITHUB_COM_TOKEN: $RENOVATE_TOKEN
     when:
       cron: "renovate"
   - name: build
+    when:
+      - event: push
+        branch: main
     image: woodpeckerci/plugin-kaniko
     settings:
       registry: gitea.hnatekmar.xyz
       repo: public/coder
       tags: cuda-12.0.0-base-ubuntu22.04
-      username: ${DOCKER_USERNAME}
-      password: ${DOCKER_PASSWORD}
+      username: $DOCKER_USERNAME
+      password: $DOCKER_PASSWORD
       context: coder
       dockerfile: nvidia.Dockerfile
       dry_run: false
