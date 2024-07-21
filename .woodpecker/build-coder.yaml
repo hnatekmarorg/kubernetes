@@ -5,6 +5,8 @@ steps:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
       LOG_LEVEL: debug
+    secrets:
+      - RENOVATE_TOKEN
     entrypoint:
       - docker-entrypoint.sh
     commands:
