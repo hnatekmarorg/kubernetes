@@ -5,7 +5,6 @@ steps:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
       RENOVATE_TOKEN: $RENOVATE_TOKEN
-      GITHUB_COM_TOKEN: $RENOVATE_TOKEN
       LOG_LEVEL: debug
     when:
       cron: "renovate"
