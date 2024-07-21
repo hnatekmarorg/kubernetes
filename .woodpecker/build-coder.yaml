@@ -6,6 +6,7 @@ steps:
       RENOVATE_PLATFORM: "github"
       RENOVATE_TOKEN: $RENOVATE_TOKEN
       GITHUB_COM_TOKEN: $RENOVATE_TOKEN
+      LOG_LEVEL: debug
     when:
       cron: "renovate"
   - name: build
