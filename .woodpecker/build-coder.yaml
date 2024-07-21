@@ -11,3 +11,4 @@ steps:
       username: ${DOCKER_USERNAME}
       password: ${DOCKER_PASSWORD}
       context: coder
+      dockerfile: nvidia.Dockerfile
