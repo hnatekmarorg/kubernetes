@@ -18,6 +18,9 @@ steps:
       - event: push
         branch: main
     image: woodpeckerci/plugin-kaniko
+    secrets:
+      - DOCKER_USERNAME
+      - DOCKER_PASSWORD
     settings:
       registry: gitea.hnatekmar.xyz
       repo: public/coder
