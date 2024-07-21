@@ -1,6 +1,6 @@
 steps:
   - name: renovate
-    image: ghcr.io/renovatebot/renovate:latest
+    image: renovate/renovate:35.14.4
     environment:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
