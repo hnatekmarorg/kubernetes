@@ -8,9 +8,7 @@ steps:
     secrets:
       - RENOVATE_TOKEN
     entrypoint:
-      - docker-entrypoint.sh
-    commands:
-      - Hnatekmar/kubernetes
+      - docker-entrypoint.sh Hnatekmar/kubernetes
     when:
       cron: "renovate"
   - name: build
