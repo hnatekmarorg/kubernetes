@@ -3,13 +3,5 @@ version: '3'
 tasks:
   encrypt-files:
     cmds:
-      - task: encrypt_tasks
-        env:
-          KEY: ${KEY}
+      - python bootstrapping/vms/encrypt_tasks.py
     desc: Encrypt all files in manifests/applications and output them with a prefix 'enc'.
-
-# Assuming you have a Python script named encrypt_tasks.py that performs the encryption
-encrypt_tasks:
-  cmds:
-    - python encrypt_tasks.py
-  desc: Encrypt files in manifests/applications and rename them with 'enc_' prefix.
