@@ -19,16 +19,12 @@ steps:
     when:
       - event: push
         branch: main
-    image: woodpeckerci/plugin-kaniko
+    image: alpine:latest
     secrets:
       - DOCKER_USERNAME
       - DOCKER_PASSWORD
-    settings:
-      registry: gitea.hnatekmar.xyz
-      repo: public/coder
-      tags: cuda-12.0.0-base-ubuntu22.04
-      username: $DOCKER_USERNAME
-      password: $DOCKER_PASSWORD
-      context: coder
-      dockerfile: nvidia.Dockerfile
-      dry_run: false
+    commands:
+      - apk add podman
+      - podman login --username $DOCKER_USERNAME --password DOCKER_PASSWORD gitea.hnatekmar.xyz
+      - podman build . -t gitea.hnatekmar.xyz/public/coder:cuda-12.0.0-base-ubuntu22.04
+      - podman push gitea.hnatekmar.xyz/public/coder:cuda-12.0.0-base-ubuntu22.04
