@@ -25,7 +25,9 @@ spec:
         nvidia.com/gpu.count: "2"
       runtimeClassName: "nvidia"
       containers:
-        - args: []
+        - args:
+            - --threads
+            - "64"
           env:
           - name: DEBUG
             value: "true"
