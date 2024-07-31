@@ -22,7 +22,7 @@ spec:
       name: local-ai
     spec:
       nodeSelector:
-        nvidia.com/gpu.count: 2
+        nvidia.com/gpu.count: "2"
       runtimeClassName: "nvidia"
       containers:
         - args: []
