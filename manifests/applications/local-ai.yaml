@@ -33,7 +33,7 @@ spec:
             value: "true"
           name: local-ai
           image: quay.io/go-skynet/local-ai:master-cublas-cuda12
-          imagePullPolicy: IfNotPresent       
+          imagePullPolicy: Always       
           volumeMounts:
             - name: models-volume
               mountPath: /build/models
