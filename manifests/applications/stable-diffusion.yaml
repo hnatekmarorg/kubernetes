@@ -34,7 +34,7 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: 1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           volumeMounts:
             - mountPath: /home/runner
               name: base
