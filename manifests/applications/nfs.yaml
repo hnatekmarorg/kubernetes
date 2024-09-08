@@ -19,6 +19,11 @@ spec:
       valuesObject:
         nfs:
           server: 192.168.88.25
+          mountOptions:
+            - hard
+            - intr
+            - sync
+            - nfs4
           path: /mnt/data/k8s
   destination:
     server: "https://kubernetes.default.svc"
