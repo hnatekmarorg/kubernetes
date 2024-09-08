@@ -1,0 +1,95 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: influx
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-data-pvc
+  namespace: influx
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "nfs-client"
+  resources:
+    requests:
+      storage: 8Gi   # Adjust the size if needed
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb-deployment
+  namespace: influx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+       - name: influxdb
+         image: influxdb:2
+         args:
+           - --reporting-disabled
+         ports:
+           - containerPort: 8086
+         volumeMounts:
+           - name: influxdb-data
+             mountPath: /var/lib/influxdb2
+         env:
+           - name: DOCKER_INFLUXDB_INIT_MODE
+             value: setup
+           - name: DOCKER_INFLUXDB_INIT_USERNAME
+             value: root
+           - name: DOCKER_INFLUXDB_INIT_PASSWORD
+             value: influxdb
+           - name: DOCKER_INFLUXDB_INIT_ORG
+             value: home
+           - name: DOCKER_INFLUXDB_INIT_BUCKET
+             value: monitoring
+           - name: DOCKER_INFLUXDB_INIT_RETENTION
+             value: 1w
+           - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+             value: testtoken # Replace with actual token
+      volumes:
+       - name: influxdb-data
+         persistentVolumeClaim:
+           claimName: influxdb-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-service
+  namespace: influx
+spec:
+  selector:
+    app: influxdb
+  ports:
+   - protocol: TCP
+     port: 8086
+     targetPort: 8086
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: influxdb-ingress
+  namespace: influx
+spec:
+  ingressClassName: kong
+  rules:
+    - host: influx.hnatekmar.xyz
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: influxdb-service
+                port:
+                  number: 8086
