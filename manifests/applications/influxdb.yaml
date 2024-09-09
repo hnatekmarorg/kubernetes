@@ -50,16 +50,12 @@ spec:
              value: setup
            - name: DOCKER_INFLUXDB_INIT_USERNAME
              value: root
-           - name: DOCKER_INFLUXDB_INIT_PASSWORD
-             value: influxdb
            - name: DOCKER_INFLUXDB_INIT_ORG
              value: home
            - name: DOCKER_INFLUXDB_INIT_BUCKET
              value: monitoring
            - name: DOCKER_INFLUXDB_INIT_RETENTION
              value: 1w
-           - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
-             value: testtoken # Replace with actual token
       volumes:
        - name: influxdb-data
          persistentVolumeClaim:
