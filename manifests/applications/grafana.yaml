@@ -110,6 +110,9 @@ spec:
       valuesObject:
         deploymentMode: SingleBinary
         loki:
+          persistence:
+            enabled: true
+            size: 5Gi
           commonConfig:
             replication_factor: 1
           storage:
