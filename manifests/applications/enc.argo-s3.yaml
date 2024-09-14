@@ -1,0 +1,33 @@
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+    name: argo-workflows-minio
+    namespace: minio
+spec:
+    # suspend reconciliation of the sops secret object
+    suspend: false
+    secretTemplates:
+        - name: ENC[AES256_GCM,data:UqwqQzL5bgTOL1EKduSBlUPxxRw=,iv:mgAjtRUfWjvqFQo1LoZDP5/1KPpu38AZjPxBLki9Lfw=,tag:QbDSTXzMMt220FFyhGNhGw==,type:str]
+          stringData:
+            accesskey: ENC[AES256_GCM,data:huYj5C/1THQGzDS1ZoeL58f85SDdZCpj/niZKxIjNLGDKFIOby6SnA==,iv:xheRvhgspWGBMAffVFeMd+UZq3cQ5QgdyNXjcDw0HtU=,tag:aSJMrfceb4zMeUSeasdFqA==,type:str]
+            secretkey: ENC[AES256_GCM,data:3H1qZJpMAj18IeQ4Jm3U+JUUyQu7d7EsqnOtyeRz/QDfVBuc060Ft0kvTIQwF6QSfdWndPvDkGcKYUrx1BlYbJVGpwFRA8W+25z/BRrOnAwiD0Q5UEK7NyICVwqhoT9LXUJHFOMBwqQigCZqlBbvvSM01Xs4gHWTFs3BwY7Ih0o=,iv:unWGZrRJBQNylvxkccKoW0+r4iLwfI3W155nNTK7uJc=,tag:b5RyNJi8/xn8wPa0LAVZ4w==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuanoxZWVPa2djb0k3UWsr
+            MmR5UkhLVTUvblkwZ0poN3A3NU92V3Y1UjBFCk13Vm8wRkp0WkRuMHJsSTVwcTBP
+            YW4zNTBidjliaDB4a3R0TkQya1VVVm8KLS0tIGsvY0w0WSt0amh0b0pJQUREWG9E
+            NXpZYm1kZHkzU2xya2xLNzdxcEo2akEK1cvoiMwC7DHtFc0/zXsP7goPvsuaQUDr
+            t7d7exT4tovpncakmXEBWjHafStg5e8go58/KUT5Ums5fkHMvSuHsg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-09-14T11:45:43Z"
+    mac: ENC[AES256_GCM,data:0AALm5BOwD1SKLbChNAcRo/YkcYNTTIhMaasZW5SKKLsD888PemS86IWvfR8fqR2mk+71UbWdbskiOcsdm2h0iiIYlIZSSZPLce3Q7ND9yli+618BM2Xa66x04hvgwYMfPuxIGImO4xiEmhqPDY8MDofwyadOq6UWAjs60dcpUE=,iv:Y9p7HikZ/12XoTMBo/xg+D8Xe10USVl5HYiWwjG/e7M=,tag:QdCASCV98Zdpfhc8Tc9PaA==,type:str]
+    pgp: []
+    encrypted_suffix: Templates
+    version: 3.9.0

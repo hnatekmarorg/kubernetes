@@ -17,6 +17,15 @@ spec:
     helm:
       releaseName: argo-workflows
       valuesObject:
+        artifactRepository:
+          s3:
+            accessKeySecret:
+              name: argo-workflows-minio
+              key: accesskey
+            secretKeySecret:
+              name: argo-workflows-minio
+              key: secretkey
+            bucket: workflows
         workflow:
           serviceAccount:
             create: true
