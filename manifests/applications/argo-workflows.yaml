@@ -18,7 +18,9 @@ spec:
       releaseName: argo-workflows
       valuesObject:
         artifactRepository:
+          archiveLogs: true
           s3:
+            endpoint: https://console-minio.hnatekmar.xyz
             accessKeySecret:
               name: argo-workflows-minio
               key: accesskey
