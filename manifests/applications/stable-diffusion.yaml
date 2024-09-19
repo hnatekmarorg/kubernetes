@@ -22,6 +22,8 @@ spec:
       labels:
         app: stable-diffusion
     spec:
+      nodeSelector:
+        nvidia.com/gpu.count: "2"
       runtimeClassName: "nvidia"
       volumes:
         - name: base
@@ -31,9 +33,6 @@ spec:
       containers:
         - name: stable-diffusion
           image: yanwk/comfyui-boot:latest
-          resources:
-            limits:
-              nvidia.com/gpu: 1
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /home/runner
