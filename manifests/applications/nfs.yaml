@@ -23,7 +23,8 @@ spec:
             - hard
             - intr
             - async
-            - udp 
+            - proto=tcp
+            - noacl
             - nfsvers=4.2
           path: /mnt/data/k8s
   destination:
