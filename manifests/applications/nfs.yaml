@@ -26,6 +26,7 @@ spec:
             - proto=tcp
             - noacl
             - nfsvers=4.2
+            - noatime
           path: /mnt/data/k8s
   destination:
     server: "https://kubernetes.default.svc"
