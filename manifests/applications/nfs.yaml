@@ -22,7 +22,8 @@ spec:
           mountOptions:
             - hard
             - intr
-            - sync
+            - async
+            - udp 
             - nfsvers=4.2
           path: /mnt/data/k8s
   destination:
