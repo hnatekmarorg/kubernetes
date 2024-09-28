@@ -16,11 +16,7 @@ spec:
     targetRevision: 1.7.1
     helm:
       releaseName: longhorn
-      valuesObject:
-        ingress:
-          ## Set to true to enable ingress record generation
-          enabled: true
-          host: longhorn.hnatekmar.xyz      
+      valuesObject: {}
   destination:
     server: "https://kubernetes.default.svc"
     namespace: longhorn
