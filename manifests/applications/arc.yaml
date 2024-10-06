@@ -12,11 +12,11 @@ spec:
   project: default
   sources:
     - repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
-      targetRevision: main
+      targetRevision: 0.9.3
       chart: gha-runner-scale-set-controller
     - chart: gha-runner-scale-set
       repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
-      targetRevision: main
+      targetRevision: 0.9.3
       helm:
         values: |
           # Values specific to the Actions Runner Controller Helm chart
