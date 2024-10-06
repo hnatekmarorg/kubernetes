@@ -24,7 +24,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: actions-runner-controller
+  name: actions-runner-controller-algovectra
   namespace: argocd
 spec:
   project: default
@@ -33,12 +33,34 @@ spec:
     targetRevision: main
     helm:
       chart: gha-runner-scale-set
-      releaseName: arc
+      releaseName: arc-algovectra
       namespace: arc-systems
       values: |
         # Values specific to the Actions Runner Controller Helm chart
         githubConfigSecret: github-pat
-        githubConfigUrl: https://github.com/<your_enterprise/org/repo>
+        githubConfigUrl: https://github.com/Algovectra
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: arc-systems
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: actions-runner-controller-hnatekmar
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
+    targetRevision: main
+    helm:
+      chart: gha-runner-scale-set
+      releaseName: arc-hnatekmar
+      namespace: arc-systems
+      values: |
+        # Values specific to the Actions Runner Controller Helm chart
+        githubConfigSecret: github-pat
+        githubConfigUrl: https://github.com/hnatekmarorg
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
