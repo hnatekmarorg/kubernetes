@@ -11,11 +11,11 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
+    - chart: gha-runner-scale-set-controller
+      repoURL: https://actions-runner-controller.github.io/actions-runner-controller
       targetRevision: 0.9.3
-      chart: gha-runner-scale-set-controller
     - chart: gha-runner-scale-set
-      repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
+      repoURL: https://actions-runner-controller.github.io/actions-runner-controller
       targetRevision: 0.9.3
       helm:
         values: |
