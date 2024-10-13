@@ -19,9 +19,7 @@ spec:
       valuesObject:
         persistence:
           nodeStatusOffLoad: true
-          archive: false
-          connectionPool:
-            maxIdleConns: 100
+          archive: true
           postgresql:
             sslMode: disable
             host: 172.16.100.124
