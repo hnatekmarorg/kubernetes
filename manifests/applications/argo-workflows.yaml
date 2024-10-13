@@ -17,6 +17,23 @@ spec:
     helm:
       releaseName: argo-workflows
       valuesObject:
+        persistence:
+          nodeStatusOffLoad: true
+          archive: true
+          connectionPool:
+            maxIdleConns: 1024
+          postgresql:
+            host: 172.16.100.124
+            port: 5432
+            database: postgres
+            tableName: argo_workflows
+            userNameSecret:
+              name: argo-postgres-config
+              key: username
+            passwordSecret:
+              name: argo-postgres-config
+              key: password
+
         artifactRepository:
           archiveLogs: true
           s3:

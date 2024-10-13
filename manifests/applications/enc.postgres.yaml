@@ -1,0 +1,33 @@
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+    name: argo-postgres-config
+    namespace: argo-workflows
+spec:
+    # suspend reconciliation of the sops secret object
+    suspend: false
+    secretTemplates:
+        - name: ENC[AES256_GCM,data:bVzmGwz7qHP8mBxHwfwVfEs/6+U=,iv:cgMeNmHgqcAplxmbwgAjP+dO6G2vCq7snWZIjx7DpJg=,tag:Xs5U747c593OEAebbM2zBQ==,type:str]
+          stringData:
+            username: ENC[AES256_GCM,data:p/8nSMiNR6g=,iv:ywSyNvzSzYJX4YT+N2lyN/Fn2DSxgGzxZF15GKOjXOQ=,tag:8UfenkIfkT6rQNpr6au6fg==,type:str]
+            password: ENC[AES256_GCM,data:ko9+0/ih3+h1BRZTrvGOSWtTAaA=,iv:B9IMIVAmUN+b69D89S6lgRLf/fER4XnBU+D7Jybpv8E=,tag:jO3CVqSUDj7Y/Qn05C8aWw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBod0pVSXlobTlXaG1MdlFN
+            d3RPRjRzKzh3QWw3NEVsdW8vcjEzNzhXaDNZCi8zTitiV2p1cVhyNVRYbWpjUU1K
+            bXhvdmN0b052UTYwVWsxekl2ZHVvazQKLS0tIHJud3kzRHp6dVRWUDgxSTlvU0NO
+            WkpES1gwei91RXdsb1I4d2xSWUZSSWsKiDnqowJq1Gy1vYiinjyvb4aTJcSVyqBZ
+            p6yynd8RnLJ/RSmy2Lp4L2Ko9b5tX9FPdz8AasQmZmQ7SeyLoDKzEw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-10-13T16:48:58Z"
+    mac: ENC[AES256_GCM,data:bnIL7rzooWyJBFQqrvZ51Kebn0cKGFEb2XMIvkBoqMzLmpZ11TuNdOUsFiehXap+CJyvlvnoX7B8N71xI/3MbH04iCXkjm+faQadZBG49cjYLmt2wpJJWGyLcaDNzu59x7lHU8UecHYGDqyWGU+ywSYxuTlkavigzKkkmqIfnvA=,iv:t/r4ETurW1sMe9U8tb6fNwI8YO1WmI/xQHmU9TZWdNk=,tag:ExEY+VsCcdbtAz4xqui1lw==,type:str]
+    pgp: []
+    encrypted_suffix: Templates
+    version: 3.9.1
