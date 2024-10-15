@@ -18,6 +18,9 @@ spec:
       releaseName: argo-workflows
       valuesObject:
         controller:
+          extraEnv:
+            - name: ALWAYS_OFFLOAD_NODE_STATUS
+              value: true
           persistence:
             nodeStatusOffLoad: true
             archive: true
