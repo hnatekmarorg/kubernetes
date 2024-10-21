@@ -113,6 +113,7 @@ spec:
           persistence:
             enabled: true
             size: 5Gi
+            storageClassName: nfs-client
           commonConfig:
             replication_factor: 1
           storage:
