@@ -7,13 +7,13 @@ spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:msMNCsXREjs/qWIWAn+foj1AEgXfQoGI,iv:56ekiGJrYGBwEG34PiIJSeAZerae3KuHWBiCuzD5Ego=,tag:hiKqy0+gv+ev8hWwLRAsig==,type:str]
+        - name: ENC[AES256_GCM,data:IqNuCVQY7YqGH3VCT/V34fBEyI4qp3cn,iv:35++iRN9c2JlNtmOBV/11K9pYyWivazXh8PJYQ1sqpg=,tag:nXC+G2oEmohdEn2g3Q3Oag==,type:str]
           stringData:
-            WOODPECKER_GITHUB_CLIENT: ENC[AES256_GCM,data:cK29JuMiDaeSWhpWFJmdihxi44I=,iv:tKZjUGV+o1LSwdhF1v/rYrXqAEbE38r0lq1RSUHd+Lc=,tag:Hkjs9gDf2w5Gks+M/qDe3w==,type:str]
-            WOODPECKER_GITHUB_SECRET: ENC[AES256_GCM,data:2D7CaD3AyjoGsuFQckoq2VSrMTSheyLUfMLBGWpvsG49IW9jPsoeKA==,iv:Rq68JVM19VTugW3hHqR+086f6yxWeTnoCwyIOEeoHQs=,tag:qjncSt/aiDi8X52HPfF6hw==,type:str]
-        - name: ENC[AES256_GCM,data:eiTGKUXKV0tywF/Abs07pQ==,iv:zmDL8uGCc640B2vCRKorAkNdFaQpJA0jVpdMi1ENZl8=,tag:6IGENFft1ArG4nWGlm4ZQA==,type:str]
+            WOODPECKER_GITHUB_CLIENT: ENC[AES256_GCM,data:yB13mh3BUBmtxwp1A2/X3oT6VO0=,iv:H2jsbroCpMUsm+3ZwXkajYyGOGhCb+Nk8T0gfnyKGns=,tag:AkvSA/ZlpfiZd3P1lSsLDQ==,type:str]
+            WOODPECKER_GITHUB_SECRET: ENC[AES256_GCM,data:d6NQ2cIS7JfgDRDhjqZISKpLINNLDPq6lvUpm05klM8hS+K95G/EkQ==,iv:aUb9mNxMruUdYU3VsijSkuuT2IuPIB4Z2kgtRJme14s=,tag:sfq1B6/Lj35Y4A3oF438zA==,type:str]
+        - name: ENC[AES256_GCM,data:4bPLO6jDIWVZAUE+o7ZMbQ==,iv:D5AJ8j34zwvGOxOkYfij9eFDvJycIorp56HgCtKcOSE=,tag:i059Zdi+PsVbIqDo4IH4iQ==,type:str]
           stringData:
-            WOODPECKER_AGENT_SECRET: ENC[AES256_GCM,data:6ARecokAB1IWZq1fHVSlN/P+u4zPTGjtOcR8nKsQNRHsOn+JsubJ3YCyWDohYTeBVyqlEgo/CRTAjwWrlGqbTg==,iv:k7yJ6eJkUHxS33lOHzIAl2X/ai3TT0XLgZgcPSt4jwc=,tag:hCO1ljgoftVLb+UkFW+y/w==,type:str]
+            WOODPECKER_AGENT_SECRET: ENC[AES256_GCM,data:FaJoqrtZJ38U3M58RFdHi5IIhXorbyQuYUvGvCCPYasOKR0YRZPcHc2Mx6XClAOkEp0XLVeS8pC+W+BHArsbYQ==,iv:NlF5B4d8iHsU80m+dMcB433q7AbTafMrLNRyeByFPvg=,tag:jNLiPo6WCuZ6IFKqFOaSxQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,14 +23,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsQndHVS9kZHk2bWdSUDcx
-            aTZlVkh3eUFQSUk3VHBSZHQzallqaDQzL2pnCndpL3d6T3RVSFpCRS9Pa2FpRUFQ
-            UGRzNmdxc1JuOWpBd3dVMWUwaGtpSU0KLS0tIG03clU1TVFtL28yK2xBaUlCMG9u
-            U3BYNEc1NnVvVDRtcHB5MzJzQ21MTDgKHg6N3ETVMq7IbabPaO4HysGKSh1SZBOR
-            Sbj+3ST6l3+Cn9ImPBRRPNPb70VFzHALnfu6aGPf/mrnlkIaLxeJng==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArYkMyejhtVXd3QVQzMUJ0
+            VmVUMzUzWEN5cGsrbUlxU0kwQnhoQjZ5bUhnCnhQY0oweTZZYThRRGJTYkJGNEta
+            UU9NMm1nUXNTa1djTW10Q3dNQjZiaDQKLS0tIFFMY2dibWFKYk10ZG5WWVFLTDVT
+            NkhtUVZFWXc0bk9tUS9mZ3dOZlFrZHcKZIM2hfuwXFgCAgcu4R3etP9DDB17AM3r
+            u2EwWWbm0YkjyNhuZhVEUXj66Yv84iWm7gX2X+c8VDowNB5g05X9Ug==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-07-21T17:15:57Z"
-    mac: ENC[AES256_GCM,data:rAay+/SwdtuDPJk2/tx27+k+52TBJUxnQrb38+jEIKZwxg3rIWL0Z25WU/+JveARDDMdADHzAXMiwDB5OV1QVsJnPnwjilJk77rhw7T/1o9fWSSfdLtFEa6N9zGHfDStv1dnzbTBtA1013q2ipkwDwWr7O3aq7M+Iqxj2pMVGWo=,iv:ojscR8m6lUZ2tpQieoxqqycHIhnIJzRCwnAiR21lKww=,tag:IhL8Z7Gl0F69hyK39cT+bw==,type:str]
+    lastmodified: "2024-10-27T08:16:19Z"
+    mac: ENC[AES256_GCM,data:skv/AQFUC+hDQVeFeu1spi8DbE2EdKfMWP6f/D9MdoQdFRJ6oYMxJRumpFlg1XqydW0f4ouhrIu/s3hou2Mm19vqAKBi7Q8BiVVIoU6IY/TZQyQGmi0HSFbKB1nPwxYZ6TwvtjiZ8HtAV22tnVF7WE38WrdZT+7tALhEIcF34p8=,iv:FKhG3AoK+0GjhpckyRAJNcwXYXS2xxEbSEKDdKfNOGc=,tag:MU9C2BiY9+jQUJG6tJG2rQ==,type:str]
     pgp: []
     encrypted_suffix: Templates
-    version: 3.8.1
+    version: 3.9.1
