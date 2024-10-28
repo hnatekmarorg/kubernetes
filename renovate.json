@@ -1,6 +1,5 @@
 {
-  "onboarding": false,
-  "argocd": {
+  "argocd": {    
     "fileMatch": [
       "manifests/applications/.+\\.yaml$"
     ]
