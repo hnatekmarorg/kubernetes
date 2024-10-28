@@ -19,8 +19,7 @@
         "major",
         "lockFileMaintenance"
       ],
-      "dependencyDashboardApproval": false,
-      "minimumReleaseAge": 0
+      "dependencyDashboardApproval": false
     }
   ]
 }
