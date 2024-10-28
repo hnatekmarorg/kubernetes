@@ -5,9 +5,9 @@ module.exports = {
   onboarding: false,
   platform: 'github',
   forkProcessing: 'enabled',
-  repositories: ['manifests/applications'],
+  repositories: ['hnatekmarorg/kubernetes'],
   argocd: {
-    fileMatch: ["argocd/.+\\.yaml$"]
+    fileMatch: ["manifests/applications/.+\\.yaml$"]
   },
   packageRules: [
     {
