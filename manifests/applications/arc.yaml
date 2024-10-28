@@ -9,6 +9,9 @@ metadata:
   name: actions-runner-controller
   namespace: argocd
 spec:
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
   project: default
   sources:
     - chart: gha-runner-scale-set-controller
@@ -29,3 +32,4 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: arc-systems
+    
