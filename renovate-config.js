@@ -5,7 +5,6 @@ module.exports = {
   onboarding: false,
   platform: 'github',
   forkProcessing: 'enabled',
-  dryRun: 'full',
   repositories: ['hnatekmarorg/kubernetes'],
   packageRules: [
     {
