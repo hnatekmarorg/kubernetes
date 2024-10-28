@@ -9,9 +9,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
+      - name: Validate Renovate Configuration with renovate-config-validator
+        # You may pin to the exact commit or the version.
+        # uses: suzuki-shunsuke/github-action-renovate-config-validator@36a15b83e37bf3221dc9c02ff5ffdaefb51ca1cf
+        uses: suzuki-shunsuke/github-action-renovate-config-validator@v1.1.0
+          
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v40.3.4
+        uses: vidavidorra/github-action-renovate@v2.0.0
         with:
-          configurationFile: renovate.json
-          renovate-version: full
           token: ${{ secrets.RENOVATE_TOKEN }}
