@@ -18,3 +18,4 @@ jobs:
         uses: vidavidorra/github-action-renovate@v2.0.0
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
+          configurationFile: renovate.json
