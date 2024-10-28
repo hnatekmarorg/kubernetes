@@ -1,4 +1,5 @@
 module.exports = {
+  "branchPrefix": "upgrade/",
   username: 'renovate-release',
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   onboarding: false,
