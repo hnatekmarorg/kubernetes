@@ -1,11 +1,14 @@
 module.exports = {
-  "branchPrefix": "upgrade/",
+  branchPrefix: 'upgrade/',
   username: 'renovate-release',
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   onboarding: false,
   platform: 'github',
   forkProcessing: 'enabled',
-  repositories: ['hnatekmarorg/kubernetes'],
+  repositories: ['manifests/applications'],
+  argocd: {
+    fileMatch: ["argocd/.+\\.yaml$"]
+  },
   packageRules: [
     {
       description: 'lockFileMaintenance',
@@ -18,7 +21,7 @@ module.exports = {
         'lockFileMaintenance',
       ],
       dependencyDashboardApproval: false,
-      minimumReleaseAge: "2 days",
+      minimumReleaseAge: "0 days",
     },
   ],
 };
