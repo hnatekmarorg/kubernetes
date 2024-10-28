@@ -1,4 +1,4 @@
-  "branchPrefix": "test-renovate/",
+{
   "dryRun": "full",
   "username": "renovate-release",
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
