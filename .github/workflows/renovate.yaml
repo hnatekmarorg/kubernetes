@@ -13,6 +13,7 @@ jobs:
         uses: renovatebot/github-action@v40.3.4
         env:
           RENOVATE_AUTODISCOVER: false
+          RENOVATE_CONFIG_FILE: ./renovate-config.js
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
-          configurationFile: renovate-config.js
+          configurationFile: ./renovate-config.js
