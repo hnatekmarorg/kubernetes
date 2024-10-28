@@ -1,10 +1,29 @@
 repositories:
   - name: argo
     url: https://argoproj.github.io/argo-helm
+  - name: sops
+    url: https://isindir.github.io/sops-secrets-operator/
+  - name: arc
+    url: ghcr.io/actions/actions-runner-controller-charts
+    oci: true
 
 releases:
-  - name: argocd
-    namespace: argocd
-    chart: argo/argo-cd
+#  - name: argocd
+#    namespace: argocd
+#    chart: argo/argo-cd
+#    values:
+#      - argocd_values.yaml
+#  - name: sops
+#    chart: sops/sops-secrets-operator
+#    values:
+#      - sops.yaml
+  - name: gha-runner-scale-set-controller
+    namespace: arc-systems
+    chart: arc/gha-runner-scale-set-controller
+    version: 0.9.3
+  - name: gha-runner-scale-set
+    namespace: arc-systems
+    chart: arc/gha-runner-scale-set
+    version: 0.9.3
     values:
-      - argocd_values.yaml
+      - hnatekmarorg-values.yaml

@@ -6,10 +6,10 @@ metadata:
 spec:
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:5IO5Ut5oHl5kNaKJug==,iv:bnjVJwTL5isYexWz5BXuN97akZjSrniTyUk3Vx29qrI=,tag:7pY4FeQosdJuuP7os2Dz/Q==,type:str]
+        - name: ENC[AES256_GCM,data:9usqLZ6sN/q8FJR1KQ==,iv:PTvF9NKKOrIc1SHOGhC6j5X4FNVAuk8lI2XKvVX5FMw=,tag:gllnUmWxVH60qemgfjvxVQ==,type:str]
           stringData:
-            DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ENC[AES256_GCM,data:fxIPEoyb9puzofeZpwOF0oz6BnA=,iv:+gc1Ly7guX6h3LKOQqBhesQAFb068zxILwnb3nX+roQ=,tag:0GvdNvbOF9pY0FfKJg4Blw==,type:str]
-            DOCKER_INFLUXDB_INIT_PASSWORD: ENC[AES256_GCM,data:txytfIMfCSndCZqSEXWSBI/tb7M=,iv:lMkJq6OSlquGeJPxW/Q3nzaH04tp0uKF34w2ZsNtJkM=,tag:KxxTLSonFTBifc/TSUVuvQ==,type:str]
+            DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ENC[AES256_GCM,data:i5HgjOdgFBZO82NNdE6H9MxkX64=,iv:+w26j0BJm/d5wlnHDBzt7AI3yewEdDWDP9So9VrUB8U=,tag:yu3W+WwdYpUFQAuzxBoAGQ==,type:str]
+            DOCKER_INFLUXDB_INIT_PASSWORD: ENC[AES256_GCM,data:kex5pBj3d0DmaTFbecHeWzHgqZE=,iv:/k6VWTsiwoDA5LhSm9J1TcUjeos1vioZnYB7c8lIWpA=,tag:oGOF+93A9m7iyTznk/GcCQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -19,14 +19,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwYnEvMnNKZktsNGtTeE5l
-            RTI5UzU1bFllL3hRejc1YU1haU5qS3NEdDNRCjBjRVkxbzNYdjI5ZFdaeHFDK2NC
-            d0hKQU1waitmT0tpc1dTYzcvWXVvVUEKLS0tIE55aVRYRlRteGVlZVF5TVRZSXVj
-            ZXN1ampGaDJwSUovWXdUQ1h4WnpmdGMKkqH8xw/9Fc911lyYzloUktXdhLR+duD0
-            WujsHuErbqSEnDcM7+dCRtUICLpYqcoNqPAyoSNs0bAc7b1vk379rQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2UXVRYmo1cTVkYnllRVha
+            WFZlcHV3SGl1WitaNUhJbDdKRmFEWVEzRndZCkJET2pXRG9GRU9ucThKT0V4QXl2
+            cGdwN2RzdkhyNUs4ZUNBTTBoSFNkM00KLS0tIGdBai83SVJvUEVwUDNGdUkycXFy
+            SGpTTW4rdzZmMjBab1NVRTVRWG1OUk0K9UPyr4lP2qts1PjU0V+gfw4nNu+dLfWi
+            3b0VIAihpGSByzh5LqlJ77e1aO8ou/4gMFoPou6O6JO9mjeQ7PMOXQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-10-27T08:16:19Z"
-    mac: ENC[AES256_GCM,data:g6J6TA4DIV4iSUp1oi0gXURLNI5Ye7JcL1lwD4b35gb/5Fdn0vHI7w3Uq6ygKPxXiarvL2aufXpPpXldtiP0RoNnv8nA/1V/4Togh6qMScvXkh4Na6gINVCXJwVDkGR0GlUbV1n7m/rGhYF8W2H8eBrX16EZyBvwNJZh0yxhQiw=,iv:RvPEsRVFwLveOdBvx3CUZxVI0oIUnMFD2pLrBG1XRlw=,tag:8mVN7xu1qegYhGddm5/9Ow==,type:str]
+    lastmodified: "2024-10-28T12:56:43Z"
+    mac: ENC[AES256_GCM,data:yTuYwLhKevmN3DiqEwevLZAuG2IDAJbkfgdtj+o3rmWjDMpztQQjGkNW1I5w5dTmG8xevD8yQTjCHLC9TEHFBlqVpdyzGjjpdeiqleQ6qkMNuWJyjoH11H8oLmw1B0NLXRyPoJcQNrig1eCepo7QQcLH2vGA9vtrwwgl2xp71Rw=,iv:agEgK4EQMsVIbVcwy8Dzwo4KoiIw5T305uQUFwCYDQk=,tag:w1gPZOaFphkig/JXA1zlKQ==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1

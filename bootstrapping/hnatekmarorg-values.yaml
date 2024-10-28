@@ -1,0 +1,5 @@
+githubConfigSecret: github-pat
+githubConfigUrl: https://github.com/hnatekmarorg
+controllerServiceAccount:
+  namespace: arc-systems
+  name: gha-runner-scale-set-controller-gha-rs-controller
