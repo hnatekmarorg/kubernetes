@@ -1,5 +1,9 @@
 githubConfigSecret: github-pat
 githubConfigUrl: https://github.com/hnatekmarorg
+maxRunners: 8
+proxy:
+  http:
+    url: http://172.16.100.146:3128
 controllerServiceAccount:
   namespace: arc-systems
   name: gha-runner-scale-set-controller-gha-rs-controller
