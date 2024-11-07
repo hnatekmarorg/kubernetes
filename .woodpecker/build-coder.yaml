@@ -3,7 +3,7 @@ when:
 
 steps:
   - name: renovate
-    image: renovate/renovate:39.5.0
+    image: renovate/renovate:39.7.1
     environment:
       RENOVATE_GIT_AUTHOR: 'Renovate Bot <renovate@hnatekmar.xyz>'
       RENOVATE_PLATFORM: "github"
