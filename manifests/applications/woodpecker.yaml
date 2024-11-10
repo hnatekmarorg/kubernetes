@@ -20,7 +20,7 @@ spec:
   source:
     chart: woodpecker
     repoURL: https://woodpecker-ci.org/
-    targetRevision: 1.6.0
+    targetRevision: 1.6.2
     helm:
       releaseName: woodpecker
       valuesObject:
