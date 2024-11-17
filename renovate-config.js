@@ -16,12 +16,10 @@ module.exports = {
         'pin',
         'digest',
         'patch',
-        'minor',
-        'major',
-        'lockFileMaintenance',
+        'minor'
       ],
       dependencyDashboardApproval: false,
-      minimumReleaseAge: "0 days",
+      minimumReleaseAge: "1 days",
     },
   ],
 };
