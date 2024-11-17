@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+
+name: Release matchbox
+
+jobs:
+  create-ignition:
+    runs-on: dind
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker run -i --pull=always --rm quay.io/coreos/butane:release < ./coreos/matchbox/base.yml > matchbox.ign
+        name: Produce ignition from butane
+      - run: docker run -i --rm --pull=always -v .:/data quay.io/coreos/coreos-installer:release download -s stable -p metal -f iso
+        name: Download coreos ISO
+      - run: mkdir -p outputs
+      - run: docker run -i --rm --pull=always -w /data -v .:/data quay.io/coreos/coreos-installer:release iso customize -o /data/outputs/matchbox.iso --dest-ignition /data/matchbox.ign *.iso
+        name: Customize ISO
+      - name: Upload ISO to s3
+        uses: lovellfelix/minio-deploy-action@v1
+        with:
+          endpoint: ${{ secrets.AWS_ENDPOINT }}
+          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          bucket: ${{ secrets.AWS_S3_BUCKET }}
+          source_dir: 'outputs'
+          target_dir: '/'

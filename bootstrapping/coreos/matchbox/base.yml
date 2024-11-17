@@ -1,0 +1,53 @@
+variant: fcos
+version: 1.5.0
+storage:
+  directories:
+    - path: /var/lib/matchbox/assets
+      overwrite: true
+    - path: /etc/matchbox
+      overwrite: true
+  files:
+    - path: /etc/systemd/system/matchbox.service
+      mode: 0644
+      contents:
+        inline: |
+          [Unit]
+          Description=Matchbox Service
+          After=docker.service
+          Requires=docker.service
+
+          [Service]
+          Restart=always
+          ExecStart=/usr/bin/podman run --net=host --rm -v /var/lib/matchbox:/var/lib/matchbox -v /etc/matchbox:/etc/matchbox:Z,ro quay.io/poseidon/matchbox:v0.10.0 -address=0.0.0.0:8080 -log-level=debug
+
+          [Install]
+          WantedBy=multi-user.target
+    - path: /etc/systemd/system/matchbox-update.service
+      mode: 0644
+      contents:
+        inline: |
+          [Unit]
+          Description=Update Matchbox Config from Git
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/bin/git -C /etc/matchbox pull origin main
+
+    - path: /etc/systemd/system/matchbox-update.timer
+      mode: 0644
+      contents:
+        inline: |
+          [Unit]
+          Description=Run Matchbox Config Update Every Hour
+
+          [Timer]
+          OnCalendar=*-*-* *:00:00
+
+          [Install]
+          WantedBy=timers.target
+systemd:
+  units:
+    - name: matchbox.service
+      enabled: true
+    - name: matchbox-update.timer
+      enabled: true
