@@ -1,0 +1,23 @@
+githubConfigSecret: github-pat
+githubConfigUrl: https://github.com/hnatekmarorg
+maxRunners: 8
+proxy:
+  http:
+    url: http://172.16.100.146:3128
+controllerServiceAccount:
+  namespace: arc-systems
+  name: gha-runner-scale-set-controller-gha-rs-controller
+
+containerMode:
+  type: "kubernetes"
+
+template:
+  spec:
+#    containers:
+#      - name: runner
+#        image: gitea.hnatekmar.xyz/public/actions-runner:latest
+#        command: ["/home/runner/run.sh"]
+    securityContext:
+      privileged: true
+      seccompProfile:
+        type: Unconfined

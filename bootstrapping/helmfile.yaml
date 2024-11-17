@@ -27,3 +27,9 @@ releases:
     version: 0.9.3
     values:
       - hnatekmarorg-values.yaml
+  - name: gha-runner-scale-set-algovectra
+    namespace: arc-systems
+    chart: arc/gha-runner-scale-set
+    version: 0.9.3
+    values:
+      - algovectra.yaml
