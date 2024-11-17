@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker run -i --pull=always --rm quay.io/coreos/butane:release < ./bootstrapping/coreos/matchbox/base.yml > matchbox.ign
         name: Produce ignition from butane
-      - run: docker run -i --rm --pull=always -v .:/data quay.io/coreos/coreos-installer:release download -s stable -p metal -f iso
+      - run: docker run -i --rm --pull=always -v ./outputs:/data quay.io/coreos/coreos-installer:release download -C /data -s stable -p metal -f iso
         name: Download coreos ISO
       - run: mkdir -p outputs
-      - run: docker run -i --rm --pull=always -w /data -v .:/data quay.io/coreos/coreos-installer:release iso customize -o /data/outputs/matchbox.iso --dest-ignition /data/matchbox.ign *.iso
+      - run: docker run -i --rm --pull=always -w $(pwd) -v .:$(pwd) quay.io/coreos/coreos-installer:release iso customize -o $(pwd)/outputs/matchbox.iso --dest-ignition $(pwd)/matchbox.ign $(pwd)/outputs/*.iso
         name: Customize ISO
       - name: Upload ISO to s3
         uses: lovellfelix/minio-deploy-action@v1
