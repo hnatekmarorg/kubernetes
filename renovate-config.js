@@ -16,7 +16,8 @@ module.exports = {
         'pin',
         'digest',
         'patch',
-        'minor'
+        'minor',
+        'major'
       ],
       dependencyDashboardApproval: false,
       minimumReleaseAge: "1 days",
