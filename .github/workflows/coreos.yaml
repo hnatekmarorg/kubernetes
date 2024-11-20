@@ -10,7 +10,7 @@ jobs:
   create-ignition:
     runs-on: dind
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: docker run -i --pull=always --rm quay.io/coreos/butane:release < ./bootstrapping/coreos/matchbox/base.yml > matchbox.ign
         name: Produce ignition from butane
       - run: docker run -i --rm --pull=always -v ./outputs:/data quay.io/coreos/coreos-installer:release download -C /data -s stable -p metal -f iso
