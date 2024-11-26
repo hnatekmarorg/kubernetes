@@ -48,7 +48,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: docker-registry-config
+          name: docker-registry-config-docker-io
           items:
           - key: config.yml
             path: config.yml
@@ -111,7 +111,7 @@ metadata:
   name: docker-registry-config-quay-io
   namespace: registry
 data:
-  config.yml: | 
+  config.yml: |
     version: 0.1
     compression:
       enabled: true
@@ -150,7 +150,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: docker-registry-config
+          name: docker-registry-config-quay-io
           items:
           - key: config.yml
             path: config.yml
@@ -213,7 +213,7 @@ metadata:
   name: docker-registry-config-ghcr-io
   namespace: registry
 data:
-  config.yml: | 
+  config.yml: |
     version: 0.1
     compression:
       enabled: true
@@ -252,7 +252,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: docker-registry-config
+          name: docker-registry-config-ghcr-io
           items:
           - key: config.yml
             path: config.yml
@@ -315,7 +315,7 @@ metadata:
   name: docker-registry-config-gcr-io
   namespace: registry
 data:
-  config.yml: | 
+  config.yml: |
     version: 0.1
     compression:
       enabled: true
@@ -354,7 +354,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: docker-registry-config
+          name: docker-registry-config-gcr-io
           items:
           - key: config.yml
             path: config.yml

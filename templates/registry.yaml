@@ -50,7 +50,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: docker-registry-config
+            name: #@ "docker-registry-config-" + sanitized_name
             items:
               - key: config.yml
                 path: config.yml
