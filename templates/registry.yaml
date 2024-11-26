@@ -92,7 +92,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: registry
-  name: kong
+  name: #@ "registry-" + sanitized_name
 spec:
   ingressClassName: kong
   rules:

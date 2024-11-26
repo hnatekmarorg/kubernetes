@@ -90,7 +90,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: registry
-  name: kong
+  name: registry-docker-io
 spec:
   ingressClassName: kong
   rules:
@@ -192,7 +192,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: registry
-  name: kong
+  name: registry-quay-io
 spec:
   ingressClassName: kong
   rules:
@@ -294,7 +294,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: registry
-  name: kong
+  name: registry-ghcr-io
 spec:
   ingressClassName: kong
   rules:
@@ -396,7 +396,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: registry
-  name: kong
+  name: registry-gcr-io
 spec:
   ingressClassName: kong
   rules:
