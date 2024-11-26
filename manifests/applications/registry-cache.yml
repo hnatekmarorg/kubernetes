@@ -25,7 +25,7 @@ data:
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/docker.io
         secure: false
-        bucket: docker-mirror
+        bucket: docker-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -127,7 +127,7 @@ data:
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/quay.io
         secure: false
-        bucket: docker-mirror
+        bucket: docker-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -229,7 +229,7 @@ data:
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/ghcr.io
         secure: false
-        bucket: docker-mirror
+        bucket: docker-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -331,7 +331,7 @@ data:
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/gcr.io
         secure: false
-        bucket: docker-mirror
+        bucket: docker-cache
 ---
 apiVersion: apps/v1
 kind: Deployment
