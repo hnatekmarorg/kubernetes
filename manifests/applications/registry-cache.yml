@@ -1,0 +1,400 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry-config-docker-io
+  namespace: registry
+data:
+  config.yml: | 
+    version: 0.1
+    compression:
+      enabled: true
+    http:
+      addr: 0.0.0.0:5000
+      debug:
+        addr: 0.0.0.0:5001
+    proxy:
+      remoteurl: https://registry-1.docker.io
+    storage:
+      s3:
+        region: us-east-1
+        endpoint: minio-console.minio.svc.cluster.local:9001
+        rootdirectory: docker-registry/docker.io
+        secure: false
+        bucket: docker-mirror
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-docker-io
+  labels:
+    app: registry-docker-io
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry-docker-io
+  template:
+    metadata:
+      name: registry-docker-io
+      labels:
+        app: registry-docker-io
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: docker-registry-config
+          items:
+          - key: config.yml
+            path: config.yml
+      containers:
+      - name: registry
+        image: registry:2
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /etc/distribution
+          name: config
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - registry serve /etc/distribution/config.yml
+        envFrom:
+        - secretRef:
+            name: minio-secret
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-docker-io
+spec:
+  selector:
+    app: registry-docker-io
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong
+spec:
+  ingressClassName: kong
+  rules:
+  - host: mirror-docker-io.hnatekmar.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry-docker-io
+            port:
+              number: 5000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry-config-quay-io
+  namespace: registry
+data:
+  config.yml: | 
+    version: 0.1
+    compression:
+      enabled: true
+    http:
+      addr: 0.0.0.0:5000
+      debug:
+        addr: 0.0.0.0:5001
+    proxy:
+      remoteurl: https://quay.io
+    storage:
+      s3:
+        region: us-east-1
+        endpoint: minio-console.minio.svc.cluster.local:9001
+        rootdirectory: docker-registry/quay.io
+        secure: false
+        bucket: docker-mirror
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-quay-io
+  labels:
+    app: registry-quay-io
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry-quay-io
+  template:
+    metadata:
+      name: registry-quay-io
+      labels:
+        app: registry-quay-io
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: docker-registry-config
+          items:
+          - key: config.yml
+            path: config.yml
+      containers:
+      - name: registry
+        image: registry:2
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /etc/distribution
+          name: config
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - registry serve /etc/distribution/config.yml
+        envFrom:
+        - secretRef:
+            name: minio-secret
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-quay-io
+spec:
+  selector:
+    app: registry-quay-io
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong
+spec:
+  ingressClassName: kong
+  rules:
+  - host: mirror-quay-io.hnatekmar.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry-quay-io
+            port:
+              number: 5000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry-config-ghcr-io
+  namespace: registry
+data:
+  config.yml: |
+    version: 0.1
+    compression:
+      enabled: true
+    http:
+      addr: 0.0.0.0:5000
+      debug:
+        addr: 0.0.0.0:5001
+    proxy:
+      remoteurl: https://ghcr.io
+    storage:
+      s3:
+        region: us-east-1
+        endpoint: minio-console.minio.svc.cluster.local:9001
+        rootdirectory: docker-registry/ghcr.io
+        secure: false
+        bucket: docker-mirror
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-ghcr-io
+  labels:
+    app: registry-ghcr-io
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry-ghcr-io
+  template:
+    metadata:
+      name: registry-ghcr-io
+      labels:
+        app: registry-ghcr-io
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: docker-registry-config
+          items:
+          - key: config.yml
+            path: config.yml
+      containers:
+      - name: registry
+        image: registry:2
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /etc/distribution
+          name: config
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - registry serve /etc/distribution/config.yml
+        envFrom:
+        - secretRef:
+            name: minio-secret
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-ghcr-io
+spec:
+  selector:
+    app: registry-ghcr-io
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong
+spec:
+  ingressClassName: kong
+  rules:
+  - host: mirror-ghcr-io.hnatekmar.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry-ghcr-io
+            port:
+              number: 5000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry-config-gcr-io
+  namespace: registry
+data:
+  config.yml: | 
+    version: 0.1
+    compression:
+      enabled: true
+    http:
+      addr: 0.0.0.0:5000
+      debug:
+        addr: 0.0.0.0:5001
+    proxy:
+      remoteurl: https://gcr.io
+    storage:
+      s3:
+        region: us-east-1
+        endpoint: minio-console.minio.svc.cluster.local:9001
+        rootdirectory: docker-registry/gcr.io
+        secure: false
+        bucket: docker-mirror
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry-gcr-io
+  labels:
+    app: registry-gcr-io
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry-gcr-io
+  template:
+    metadata:
+      name: registry-gcr-io
+      labels:
+        app: registry-gcr-io
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: docker-registry-config
+          items:
+          - key: config.yml
+            path: config.yml
+      containers:
+      - name: registry
+        image: registry:2
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /etc/distribution
+          name: config
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - registry serve /etc/distribution/config.yml
+        envFrom:
+        - secretRef:
+            name: minio-secret
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-gcr-io
+spec:
+  selector:
+    app: registry-gcr-io
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong
+spec:
+  ingressClassName: kong
+  rules:
+  - host: mirror-gcr-io.hnatekmar.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry-gcr-io
+            port:
+              number: 5000
