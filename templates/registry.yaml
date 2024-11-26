@@ -24,7 +24,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        endpoint: minio-console.minio.svc.cluster.local:9001
+        endpoint: http://minio-console.minio.svc.cluster.local:9001
         rootdirectory: #@ "docker-registry/" + registry
         secure: false
         bucket: docker-cache
