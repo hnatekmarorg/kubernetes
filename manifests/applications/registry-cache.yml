@@ -21,7 +21,7 @@ data:
       remoteurl: https://docker.io
     storage:
       s3:
-        region: us-west-1
+        region: us-east-1
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/docker.io
         secure: false
@@ -123,7 +123,7 @@ data:
       remoteurl: https://quay.io
     storage:
       s3:
-        region: us-west-1
+        region: us-east-1
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/quay.io
         secure: false
@@ -225,7 +225,7 @@ data:
       remoteurl: https://ghcr.io
     storage:
       s3:
-        region: us-west-1
+        region: us-east-1
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/ghcr.io
         secure: false
@@ -327,7 +327,7 @@ data:
       remoteurl: https://gcr.io
     storage:
       s3:
-        region: us-west-1
+        region: us-east-1
         endpoint: minio-console.minio.svc.cluster.local:9001
         rootdirectory: docker-registry/gcr.io
         secure: false
