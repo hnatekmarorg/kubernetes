@@ -18,11 +18,11 @@ data:
       debug:
         addr: 0.0.0.0:5001
     proxy:
-      remoteurl: https://docker.io
+      remoteurl: https://registry-1.docker.io
     storage:
       s3:
         region: us-east-1
-        regionendpoint: http://minio.minio.svc.cluster.local:9000
+        regionendpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/docker.io
         secure: false
         bucket: docker-cache
@@ -124,7 +124,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        regionenpoint: http://minio.minio.svc.cluster.local:9000
+        regionenpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/quay.io
         secure: false
         bucket: docker-cache
@@ -226,7 +226,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        regionenpoint: http://minio.minio.svc.cluster.local:9000
+        regionenpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/ghcr.io
         secure: false
         bucket: docker-cache
@@ -328,7 +328,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        regionendpoint: http://minio.minio.svc.cluster.local:9000
+        regionendpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/gcr.io
         secure: false
         bucket: docker-cache
