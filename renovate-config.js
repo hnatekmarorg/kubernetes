@@ -22,3 +22,8 @@ module.exports = {
     },
   ],
 };
+
+function foo_this() {
+  // T
+  return 0
+}

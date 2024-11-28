@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invoke-ai
+  namespace: default
+  labels:
+    app: invoke-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: invoke-ai
+  template:
+    metadata:
+      labels:
+        app: invoke-ai
+    spec:
+      runtimeClassName: nvidia
+      volumes:
+      - name: shm
+        emptyDir:
+          medium: Memory
+          sizeLimit: "2Gi"
+      containers:
+      - name: invokeai
+        image: ghcr.io/invoke-ai/invokeai
+        ports:
+        - containerPort: 9090
+        resources:
+          limits:
+            nvidia.com/gpu: "1"
+          requests:
+            nvidia.com/gpu: "1"
+        volumeMounts:
+        - name: shm
+          mountPath: /dev/shm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invoke-ai
+spec:
+  selector:
+    app: invoke-ai
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: invoke-ai
+spec:
+  ingressClassName: kong
+  rules:
+    - host: comfyui.hnatekmar.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: invoke-ai
+                port:
+                  number: 9090
+

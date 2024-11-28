@@ -324,7 +324,7 @@ data:
       debug:
         addr: 0.0.0.0:5001
     proxy:
-      remoteurl: https://gcr.io
+      remoteurl: https://mirror.gcr.io
     storage:
       s3:
         region: us-east-1
