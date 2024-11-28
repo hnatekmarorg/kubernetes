@@ -1,0 +1,32 @@
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+    name: github-pat
+    namespace: arc-systems
+spec:
+    # suspend reconciliation of the sops secret object
+    suspend: false
+    secretTemplates:
+        - name: ENC[AES256_GCM,data:lM6Qcd/fOi1B4A==,iv:NdktTql/30fXYGwQrKqaFlHSWHnVHlRI1wbZWhtE5j8=,tag:2PTJ+ahnJxo8A3xBYTcwXQ==,type:str]
+          stringData:
+            github_token: ENC[AES256_GCM,data:8Tfy9zL7QkWonqSjy6LX8krsQ1nMq94z65D6Ifa7XkXOIiWPHFSrkQ==,iv:e09n6gA0glCYaKVoR5jyB9lgTa8zO4IiML66l6lQThc=,tag:+7T+5RFN7a4Mdk6AHHNwqg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmNmsyUjdLVGxyb0FiSkJ5
+            eDNxc3d4M3YrZXpWSUZROE5BWG1CNGNESXkwCnBXdG5iNjFWeDVsdjJuUGN1OVho
+            dlc5NVIwc3ZFWVRzTmpDUk5kbVdQdHMKLS0tIE5PZ2RxMzhNaUlFVytzYmkvZHVy
+            dU1oNkk2c3JYOGpRMlhTNFBOL01xa1EKcdWJEv2end8sJN2HoRvdGqwJJiPP4wO6
+            muFCfNsKIoJZLliNltDfuc9F17nQH7Se+tHrLYKsLO1jfFU6MJtp9A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-28T16:56:32Z"
+    mac: ENC[AES256_GCM,data:CVuBaUWHJoeKmAvIOQh7h28W8I/PcgjQ5uvON36J3MD8o27a/9ucIswzc3Hf7qDLeVKalXH+r7wWpLUWYlCaVyRVp3Oo+DcP2MlkNvmlWXlPMY63RNND61v8lXZiXDZ4ykwMg++cf5PFXOcdBnv+oeyoYpK9qf45q4EWlnL00zA=,iv:p7GOvhFvuLgmxR3M48Z3PtTAYB8xBsNxQtD91xW24dI=,tag:0rhQtQ6lM3vxLmO3uip9tg==,type:str]
+    pgp: []
+    encrypted_suffix: Templates
+    version: 3.9.1
