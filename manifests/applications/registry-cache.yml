@@ -124,7 +124,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        regionenpoint: https://console-minio.hnatekmar.xyz
+        regionendpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/quay.io
         secure: false
         bucket: docker-cache
@@ -226,7 +226,7 @@ data:
     storage:
       s3:
         region: us-east-1
-        regionenpoint: https://console-minio.hnatekmar.xyz
+        regionendpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/ghcr.io
         secure: false
         bucket: docker-cache
