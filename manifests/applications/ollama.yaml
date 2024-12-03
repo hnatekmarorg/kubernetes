@@ -47,6 +47,9 @@ spec:
     helm:
       releaseName: ollama
       valuesObject:
+        extraEnv:
+          - name: OLLAMA_FLASH_ATTENTION
+            value: "1"
         ingress:
           enabled: true
           className: "kong"
