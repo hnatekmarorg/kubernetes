@@ -44,7 +44,7 @@ spec:
     chart: uptime-kuma
     repoURL: https://helm.irsigler.cloud
 
-    targetRevision: 2.20.0
+    targetRevision: 2.21.1
     helm:
       releaseName: uptime-kuma
       valuesObject:
