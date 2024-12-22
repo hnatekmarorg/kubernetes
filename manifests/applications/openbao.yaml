@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openbao
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openbao
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: openbao
+    repoURL: https://openbao.github.io/openbao-helm
+    targetRevision: 0.7.0
+    helm:
+      releaseName: openbao
+      valuesObject:
+        server:
+          standalone:
+            enabled: true
+          dataStorage:
+            storageClass: nfs-client
+          ingress:
+            enabled: true
+            ingressClassName: kong
+            hosts:
+              - host: openbao.hnatekmar.xyz
+                paths: []
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: openbao
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:
+      - CreateNamespace=false
