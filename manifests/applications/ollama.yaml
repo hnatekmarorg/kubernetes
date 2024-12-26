@@ -51,6 +51,7 @@ spec:
           - name: OLLAMA_FLASH_ATTENTION
             value: "1"
         ingress:
+          runtimeClassName: "nvidia"
           enabled: true
           className: "kong"
           hosts:
