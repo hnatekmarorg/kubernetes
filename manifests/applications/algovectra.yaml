@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pizza-backend
+  labels:
+    app: pizza-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pizza-backend
+  template:
+    metadata:
+      name: pizza-backend
+      labels:
+        app: pizza-backend
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: pizza-backend
+          image: gitea.hnatekmar.xyz/algovectra/pizza-backend:v0.0.55
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: config
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pizza-backend
+spec:
+  selector:
+    app: pizza-backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  ingressClassName: kong
+  rules:
+    - host: pizza-backend.hnatekmar.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pizza-backend
+                port:
+                  number: 3000

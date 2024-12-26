@@ -7,9 +7,9 @@ spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:wcfuSNOPlHc=,iv:I0dNdY8nc+fzBgTmsfe+PvL1698f3gE9J4R0NmV5WyY=,tag:SHWtG9VCNMC0whOHobVrCg==,type:str]
+        - name: ENC[AES256_GCM,data:jlCd7Pnnkhc=,iv:Qf62Wl9Lo/0Gs1Nz/Bbz7smV+EjWLxCtPmhTgUi30IU=,tag:GVlX3a5MalpfzuCGmzmnFw==,type:str]
           stringData:
-            config: ENC[AES256_GCM,data:aab2qef52z5N/3XKDvf56hRreYDeDBNgd9TnDdLTF8eEyeLUu5OTWBJanZhEWcwPlkcF8AZid3nmlcBruH+cL4Qr2WXnkZu7sKQ8rMyZnieqxfmvnWuebZxy9wYKNxUhZAMOfAQeLbCz/pH4S4Nwoa9dWa5YNzk0HncYO8zevCnYwoRvjY5GCgsoFiwIkYCmrOg+oha2inMzKVZsH0UUxWFUpEVjC90sOpS5OZxVlHHyrQaP61ukWSzDRPUS7rzRckTkBD0eDk6xzcOqzHdqkndxg+JIEeRn9Vc7H8+HH47/0c1oHxrEJ2TmlR6dZ7zN/44D43y+s3vApkUWBTp5CUG5M4XzOCp9x5fqkyNB+uyv8/joT/WFALU2E7pZypQFVovrhkhCNaNaE86UrRIvhWjfLNxpYbCExn8LAmaO9a4YBCbFlrtY+hvdSOaLPAvfpHxrfaghWf/Pnbo6MP0aeFrI93f6gUqpXa2Q9bJ5Teinn7G45c3KAet7l+pNTqWjYPtzvu7R1LAN1O47+YrfF/aLefmxMboBbLncWflaEgGIb9PU9fCFOA8xFpB03Hm+FtabTvrQb2YZ,iv:lKIXqL/XZUUB1FHUs13Gq5kteanBwq0n8dzFYs1vbw4=,tag:kxqEpd0TyZAlgpb22WEsRw==,type:str]
+            config: ENC[AES256_GCM,data:llY6FxaG7w5RxGCO1IWuoKHdieGCNC9syE55we//DJ3H167D+0bylHW/S9LenABZ6f1Wf/aJLSKLUuWOrNUodGn2jugLF8W6LVUE/B1BrBhAq24xzL0sd2Vqh8XWMMiqNQNk7IZa614ruoJp+PNPW7TjPmeP+kr3PgKBeuq4L8lDQsA+PlKYu5gJnA/ezPZVLsSWD9B1Jvuvmb/iHskUknfpVXQkCpvxnH3jTmF8JKNbQhJuqQiq35mWUKPEnme0eoPWIKmmZQRA1p8k4CbyBlIP835ztLdgcnBco3Pse/HelPlTL0qBnyjDpJvpQJ5yM9ik+7V201m8Zo6O8jBCk0AVrNRDoOeUN4aeR6kACV1peRWCXGaIxDaqUw4SdLMqPJJQDz9cnw8SEWazyOeo5H7Z7rCbiAuHPy/ujQU4KY877hMbEhmISsYpLbWNQvUDcIKjRrwtQw2wdI3l4hk04WS25slAXejNEqHMZvfqCjiYBxjrR/xvEyZCCyyfwIuEKCS1nm1/wW8HreLxefwIxGgDmA0sQ4uHhPS+Rt7sRUPoeWgnHZaYe8nuymueI/QNoTtXYhGzB0eR,iv:B27ffLTHDHG2NEo+nkCB/ctjhxv5iEGYG1r0nNfHfj0=,tag:Ct/qD2UzeqbK4dIADgywSg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -19,14 +19,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDaFRnbnJzM2FCYmVCRkdj
-            c3pQeWFrem0yUlVkckFLYm1hU0pVUE15MUd3ClZRaUpEQ3dDWUZtTm01VDNNSEpq
-            b0xkbTlFTGZ5Y01XQmk5ckFOZUI0eFEKLS0tIGQvZ2xqMGVkSmhDWUI5cUlwVXVK
-            RW1taURaaFg5R2pGQVI2Q2Z3bndDZFUKGLRGcmURLEY5tRFiHpd1xg0GrKakFyCU
-            HFQA6E783suoxHh1q5BTwuSclxxmcVclSHTd4joMJF7QUQv1qpV4RQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrRTB4Q3FpZ0pLNmJNL0Za
+            QnRJVk04dm52SEVuUFZuOG5FYWVyMjZGOFNNCnNuTG01NExWTjFqMUd0c0NpWFlh
+            eHhETW13UHcvMFhhcEFMS2x6ekczNG8KLS0tIHgvRGJrQ2RtZlBxRkV4eUJlNjdU
+            K2NXSDBTeEl3RzkySGw0VGwrUWF1T2sKBs9LYCCHK8MuSWlkRPWrgjQA00SK5+IL
+            /DwSwQCFeU9goFGWcR3MTJY5AYoSuEJj22mZUfAPFOTHPUt1gFZjpA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-28T16:56:32Z"
-    mac: ENC[AES256_GCM,data:CmChGiEWu/SUNctf6LRL5YatA638VfT5hr+EyPGKDykGc9pZVj1Hx3iq2W+KRrIimCOMKXGBW+7s/dRCD0MVbi9/b/3EzQSs2Aqr3JsuTY+WjP/q47VihoAZClEWvEzzJYSqdHrBbRJg4E2WGGUqRoRkwt68o26CIG0ToHmlsTY=,iv:VlsoYww3sl6Qq4KDi2ndmq7yJN2+NBP0R8TaVxVmh/A=,tag:HaRIxxBZRiCLcomxPFfqMA==,type:str]
+    lastmodified: "2024-12-26T18:57:07Z"
+    mac: ENC[AES256_GCM,data:itp3CGiXWSKJ0aXg+9ev9PoQztZmJ0i7vPqhnKJIPETeLxBk5+eCZkS28OhZ0JaGEM0Ybygv1/wXijpfpyMTxcYWDvzw8b3tEDiCEM675V2+Ba4MApgg/PJ61LwLnpTBcLlqc81901uCAOFcD8YRnbp8bhbB8B3+Iimy7jFmL0s=,iv:+pVjTZaGZfhhSvPM1UoeV/zlIFKM76Pq2Gt2h7InmLU=,tag:xldQesSgbgTMdDumtprDUQ==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1

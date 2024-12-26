@@ -7,13 +7,13 @@ spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:/YvbPjjh0sOdQA==,iv:oV30NMWc/79Bw7698Xbwk48WjSDtRYo+EChSnoUheWk=,tag:LhgOfr3aDMDWxkMQdogzxw==,type:str]
+        - name: ENC[AES256_GCM,data:vuIkER/a3mvd6A==,iv:IODmLA06ACCzfx/vki6052x+5Q00ZTk9/gYZ1QNrnsc=,tag:roLiKSIdiipIw+dvCcv1dA==,type:str]
           labels:
-            app.kubernetes.io/name: ENC[AES256_GCM,data:ucbjTr/7Jq6e,iv:FlkZ3ZZmVb9i9BWPCMuyPRu0uUojSGmeH9eJ2V8BR/w=,tag:4urzAPc1GpQTGdQ98pTL3w==,type:str]
-            app.kubernetes.io/part-of: ENC[AES256_GCM,data:ImD93Htn,iv:L/1DOyQz8q66SwLpN5jIN4yb/vNLV4RS7gUEMyilpoY=,tag:LuaVZc/wcHZntPCdmC5NPg==,type:str]
+            app.kubernetes.io/name: ENC[AES256_GCM,data:noE4m1Ced8yh,iv:6Mox6QhlzZm2Qq3DGmV27UM1c8oOFeWafe2vkdWXhY8=,tag:aRXGj/ZJMW5AgFqWP9Z3sA==,type:str]
+            app.kubernetes.io/part-of: ENC[AES256_GCM,data:03WYxweb,iv:ZQbwWmXSVlxMKrFIPga5vqok4bQJr9PQ8OrYwIrAK8o=,tag:WWY0yHmTTAWtnFg/idC/VQ==,type:str]
           stringData:
-            oidc.authentik.clientID: ENC[AES256_GCM,data:4Qm4txbhVHSbfW8rzxqfyLdW+zftf/QIPMv0/k3DygYT4QBsabMTPg==,iv:+pnYwZoT0kXVyBXxhDcJjkgV2FK7dEaosnpE4KO87Is=,tag:tNVi6E+yaGW34cydFAWJNg==,type:str]
-            oidc.authentik.clientSecret: ENC[AES256_GCM,data:c8NUDDsihwM5mkcopC2DdVdgGeC6u8rrj0qG0ihuzu59oyyVjPo91SQfaAp7/V1qhYKBxX2ghp7UpIo8MS8EZGtIPrjYBBeuJwIAG6n23f9LdSJXFuU/K0jTXd4l/ob1Y1d1UpOMp1y5tgK0L2a9CPF3RsMkGUR7nmXmPStdm5w=,iv:kJenCx0bkKBomNfkzhhrG76+h2qVgBZ47nz7phO1rNw=,tag:M3kMZF7INqVaQwCB45YFwQ==,type:str]
+            oidc.authentik.clientID: ENC[AES256_GCM,data:ZmoS2sku9tr+dEBUUGelyp99Ix+ALz1NJoynb57LmC9WCVVwcwGKjw==,iv:JRLEyXJQ7llzfbUKHYVaASthQ0PV9zyzL1PIKeq60wc=,tag:SIY4N3YFfOUdEND+ze5obg==,type:str]
+            oidc.authentik.clientSecret: ENC[AES256_GCM,data:BBPow+7V9GkVlX8gH16MQVWTvPVClXqH3whxSvmmdfAsQ5FRekeC1kP1uvV81L/0GsGN1Q3oNHMLSMgBnIUd/qqyy3twC2iCTb5l1bWQlvtEQxBHvDyOE4cGLJhUfFBHas9WZP5g7A/1fif60IEiOrBjjpeffEISyxljfBOYiVw=,iv:Lc0aH0sKycg2Mp7oFpb44Q9ahIfoVZvsiEk2ijD0nPk=,tag:l7ZLZQr094S5wBdI46a+kA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,14 +23,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3bkNsRktNaEZuUmRUQVRL
-            MldnUjU2QUJwbHVLVitxYTBMMWRFVDd3R2lnCnFaVmdUZDI1OGM4T3MxNDFuWWh0
-            M1ZzUnloSUNST29ROXVtdTlHNVpRZVkKLS0tIEx5bC9mQ2xHak9pM2xsTDJMRk5p
-            Q0NyS3Rzenp6MWl5OGdYdGVPeGlsUWMKqxPmGxBX981iYLIxewE3LzZN7ziRKwca
-            qG2OF/6deI9z+EVMvwhHrbjFG3kXAtZuBGFeRCCq0ijGniWbI2t3fA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0elkyU1BYR0o0M2lnWE9n
+            YWVYWG1JbUV5WGVLQUVzaGpkOWRVWWFGbkFnCkxXZ3kvYWJoSjhBdDJwUWtwNzVh
+            RmJZTWkzS1l4YlZPYm9iODlxanV5b2MKLS0tIC9qald3Q28xL0Y2RUhSOStrMkRO
+            NmZFZmdJaDNDckFYdnUyblZBWlBNSFUKo+Z85VQHHan3D6cz46DBiWGjItkSH/Lg
+            e++DCD1OQc5dHCu23rjJYqNTn1DqcJv/pnKfnORBboyq+bT07FrmEw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-28T16:56:32Z"
-    mac: ENC[AES256_GCM,data:/Qk4WDQprWy02ov48PoqSuoLgkZ1eYhwedNBE3Z2qoh2CdLRjl0wChyjuLV5w30H8aIZsfwA++RUTtBMml6Dcjp7AHlV4zFyapee8lAnbNdJs7dHN3sMYlBlCwpi2FvTay7+byEmOy0haf8N4fcKFhkG5dedWKb9cbQ2dpxyqDA=,iv:03RWlkQxh8kz7bdOtkl2qDFoRMPvkBh/1LxbmbZRaws=,tag:ywBb9Pxse9CO87RNSRqZRw==,type:str]
+    lastmodified: "2024-12-26T18:57:07Z"
+    mac: ENC[AES256_GCM,data:/KS6DgDuRt1FXQVFmVr5Jfju4GzdwzVcS3kt6ANJKt6YTBrXbRnBQr81RrvS+Mi7xq1HR1Y9dsWdSm6YaFArF1h9wuQaolJwvOcgW5gc7llquH0cfuAE2QyyHQeEMdHqkQR5Y7OnNTkkmFZucozFEehLAyOTwSQz5jf/tFU34fA=,iv:7wOmNUZSAzVJDfThJdVvlHv+qEvh8sfDrK1J8DosBXE=,tag:o1lyzuZcSANasNmsQQ7opw==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1
