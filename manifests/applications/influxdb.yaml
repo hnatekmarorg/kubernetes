@@ -11,7 +11,7 @@ metadata:
   namespace: influx
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: "freenas-iscsi-csi"
   resources:
     requests:
