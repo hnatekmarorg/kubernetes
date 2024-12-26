@@ -21,7 +21,7 @@ spec:
           standalone:
             enabled: true
           dataStorage:
-            storageClass: nfs-client
+            storageClass: freenas-iscsi-csi
           ingress:
             enabled: true
             ingressClassName: kong

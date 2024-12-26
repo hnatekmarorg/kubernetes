@@ -12,7 +12,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: "nfs-client"
+  storageClassName: "freenas-iscsi-csi"
   resources:
     requests:
       storage: 8Gi   # Adjust the size if needed
