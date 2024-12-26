@@ -1,26 +1,26 @@
 apiVersion: isindir.github.com/v1alpha3
 kind: SopsSecret
 metadata:
-    name: minio-secret
-    namespace: minio
+    name: pizza-secret
+    namespace: default
 spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:xWar4WWL,iv:ddxziDblROe66fAgl2SYexZmujNZFwYq8Fb5aoifVWQ=,tag:EshKuSKuKGtrHcWMSEHWPg==,type:str]
+        - name: ENC[AES256_GCM,data:uD8IZGKj,iv:JjS7NkLCB6mZHt9mZg3TZiUVU2rdBsRQKuGvx8q5704=,tag:9Bmf7q1Z7sFXeJbGNs0PJQ==,type:str]
           stringData:
-            camera_url: ENC[AES256_GCM,data:kGCQsAkQtw2NkDj7EhnvbUSyi4qgNjFJlJw=,iv:Ity/t2xtYeKpiGsgQuK78/N9s3wRt3YTvole2a8QJmw=,tag:30ei6VmjFFUQOKmM7l6vfw==,type:str]
-            mongo_username: ENC[AES256_GCM,data:s+8n2g==,iv:QH36GlmFtiqaV0im11ly490t6xpCzscSBg+wflkUJTk=,tag:44VXNWk5UJR0nGF1cXlyUQ==,type:str]
-            mongo_password: ENC[AES256_GCM,data:7Xps9q4N,iv:I9DJGbK735RsE/dlr+g1FXVC3qi/zyRYqQdVuYThZr0=,tag:PG2K4b1X3Q/eObdTEX6DyA==,type:str]
-            mongo_host: ENC[AES256_GCM,data:79VEJFbZh69k8CJZIDA=,iv:v4M6FdenjdgmbJ1pWLs/6DG7t3GpYfV9+lQ1wUuGoTk=,tag:29HL/hNqaQwmsbdPhOGZcg==,type:str]
-            mongo_port: ENC[AES256_GCM,data:9QzPVQc=,iv:RYhowOVydJCD3qwJVxkWBgW00ufEQiqyHlMbcJvzfSo=,tag:9psRSBRWnt7ULATllLjlMg==,type:str]
-            mongo_database_name: ENC[AES256_GCM,data:1H5i2zScvlw=,iv:FSSW1hGV0fqE2niS9SQUpliNnCj1eF2Z0RxP/9hW8rY=,tag:r17lBQJiiLkroJrwG5oivQ==,type:str]
-            minio_url: ENC[AES256_GCM,data:5X1AD4ujSVzTmqUzBcAPJeSmKA/I5gF9b8H7MKK6chqtpw==,iv:cJ6JgIScBL3z29FjKpEhXtalGvHjfEQrqZpItr+0wP8=,tag:OlKx24LHKb/iyTtNw0T9ig==,type:str]
-            access_key: ENC[AES256_GCM,data:3ExkMXZ3mqKw25bpNizmAIlu6x0=,iv:PajH5mI4oqOFANgGsJl13ft9ZismROKWCKeBUoo9EEA=,tag:cAnonFYs/KaIbjyJ6WDc4g==,type:str]
-            secret_key: ENC[AES256_GCM,data:a1gvQ42d3fNqDYLSlLC/c1R1kkhlb1uK2YCbB5wRK26nqlOdhjxXFg==,iv:VWgwkMoGl+ZyKu6LwRi5BN668f2cf+axuBpwdDIo2HI=,tag:LCXOOtB/D6AC/NTdiLuljA==,type:str]
-            bucket_name: ENC[AES256_GCM,data:Kw/JA+Ga5iWSpBc=,iv:DLbm4w78ryIL6muYobRtQDAIylDlIV7M9jI2O3YkhiA=,tag:esRBn0VtUScDuFEnjkYv5w==,type:str]
-            bb_api_key: ENC[AES256_GCM,data:z0mRB+CP6u8EAMUj94RKNCR3jXjDIP3FV76D2L74Otw/+YvRb9ms+g==,iv:Q724qDt6oj47d6AmUjkfcLATAnKHXK8hOi630JWCjJg=,tag:6qmXy+GHnreqjNUA8fN11w==,type:str]
-            bb_url: ENC[AES256_GCM,data:1NSwJYm8slCOGwCgUDz0SrO9CjGqxaMW5tX3ksQkeaHu/5VtkA==,iv:oV8bkzY0Me59LXjyNUrN9oPHtfP8VCdQHqhIdnKK6jM=,tag:aIG6vugKjvPKOhnynhkjdw==,type:str]
+            camera_url: ENC[AES256_GCM,data:kJwSQz8APDs51Sxo7HOzfRnqx+dFjSjL3P8=,iv:i3lYKfSV8C3xTO7mBAHxq/JVlPg5EtW2aXGoFyNTllg=,tag:5ktfdJDCPDusj8UrGYOOsQ==,type:str]
+            mongo_username: ENC[AES256_GCM,data:Rrk6dg==,iv:mbfEnb3enjOPzIy1d3sCcOQHbk/SlhHxMglMjc6dJNo=,tag:27iuT+hDi6p5p+MIuoNCVQ==,type:str]
+            mongo_password: ENC[AES256_GCM,data:nw6gyjjp,iv:xWGDtj4N9fEClUMBmcHo8J0Gi4JVhNl2/5k3mvnKk8I=,tag:mxb8ewj1RbJYg/oithCbHQ==,type:str]
+            mongo_host: ENC[AES256_GCM,data:S8vKp4Vj0uxl2i9e/n4=,iv:abnjdpUbR5oAZu1q2egMHh48sVByi0HbcSO4iV3SnZc=,tag:6FXFHHktXefK6npGJrAc2Q==,type:str]
+            mongo_port: ENC[AES256_GCM,data:eK/YOyg=,iv:5Ka3ULMIQ9TIGjMKIcnMmRrQNkHprf9CcNHPJSbd0a4=,tag:pMe/eeIoyR4kehkGw/PPVw==,type:str]
+            mongo_database_name: ENC[AES256_GCM,data:ftR4mJBgANs=,iv:XpWQ1XL3yzSxcG7Vs+pvNTT8IfSquzSp2+Z9DFvMUWc=,tag:/H8AlwX9RJ36sns0SOSa1w==,type:str]
+            minio_url: ENC[AES256_GCM,data:iazzEDPcbAar56+odRucoOQgDaw8xbuoDLXmEFVDYZt48g==,iv:VvHjw4tQnLJoKnBRAV0z0nPO1dJA8k6BsRQ1czqpzao=,tag:aBdHYChjcGfX1gb7LJE5qw==,type:str]
+            access_key: ENC[AES256_GCM,data:n3X8erZM7qTvzxW4LuNcShDtNzk=,iv:bcovS8KGhMUsJHbnZ+zw6Zi+QyRdPrU2LdCTH5Gw7rs=,tag:MwUdpJv8kGqKkZgj1MBuoA==,type:str]
+            secret_key: ENC[AES256_GCM,data:phTmX36r0CcF6SdfqsAowuQLNZkk3eBAGGO4grV6NHnUoW6yHQ67RQ==,iv:Y+dnfJiuvKO1/fsdp+PsOGgYFW45/412caYc3soipfM=,tag:jFrTbxLWN1B49IlmpHbvuA==,type:str]
+            bucket_name: ENC[AES256_GCM,data:T65tNcEcI0H6Myg=,iv:+lAQSsEsxs1nack1LdiVUpl3XIM+TDDG8Y1/sLHnqBM=,tag:FYOAYYWR8TWa/eM7aAqLlw==,type:str]
+            bb_api_key: ENC[AES256_GCM,data:SSDo6Kqi+LUUbJ0AWcwtR2RFdU1K0RmeJMNlwtq6WSpuqpMjLfltOA==,iv:y1THfjpZ144EJLjySusxHyW9VuJ9zar5vqsJZuL1Qt0=,tag:o9Ev/WWgSaZJp+rwPD9CTQ==,type:str]
+            bb_url: ENC[AES256_GCM,data:5Y5HbpYjLC7deRnLOKYPKRr6ezJHQZHznQHncaG8mCblAzd/bw==,iv:O7nc2NZ5oz3PpVBwTfNKIlqfbiC7ekBHemYZ351rBG8=,tag:luC9C69pNLwFbZQw+S4uvw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -30,14 +30,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQU0xzbkNMVE4rcUxyeG1M
-            ZTdBZWs3SnE2dmdYM1h3VW13YjlVbjk5QWhJClBUcm9mN29YKzM5UUZYT0wvUm9v
-            d24wOGlQV0g0eWp1WjRaNFl1NjI5c0UKLS0tIGF1aFdoRWZVVG1hVFhvQ0VLWVE0
-            a3pHL05lcnJycDc3OHdyMTNkcyswNTAKq/Fubcj3stP6RdQ3erowxv2zNDe4RMJi
-            jYCf4STIJBXTj9pFux8XVhwptgQc7U2rmvBbvo+7Ufd08CXeUeXfzA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXUWhQTjVXUXFaeVpGOC90
+            NThWVnVEWUdqYVJpMHJUaWVTMm9XWUwxSG5FCm9lc2FoQnd0dlRyS0h6NEx0bUVE
+            RktIazRMdG4vUlNWTWpObkFOb2oxZEEKLS0tIG9jS2lHQXhRWVljYWUzeTVqNldJ
+            QWVWU3A0RWtmYVlvQUtGc20zNmFMSGcKGHnt9zlPWiZwtqNmLjRr2J6PbtwlQ6o5
+            Hc4nzddLQRBfkBBOjA//mhKPeD7JqIc45+VHEGm2/5lngklglzIljg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-26T18:57:07Z"
-    mac: ENC[AES256_GCM,data:BPExOLcEMfP2mzxiw31NIiDEOF7r4in3zP0EDwSN+F1xBk8SZ6nQkacVkQhbVEYBV7M2gg/U6kralC0whi+MfEUAEpGUQrvxR/S0iO1JB4QhMPLHaK/5yWP8e90sqtGS34Y6HAu1oJ+gZ1yhzKcbO4+9mxYcvXsP2AJ6FxB4ZZc=,iv:xtvLWrAd1cJHBI2lVdNremvtb2GGPzUByd/Ytwfcjx4=,tag:AvFve4TgQwj1wTeer0Szew==,type:str]
+    lastmodified: "2024-12-26T19:09:38Z"
+    mac: ENC[AES256_GCM,data:+O+RFQ+JYWfLqJ51QmRR3GxLqMb6MeQ0+7+NHFkQqK3Adzkfd2TFZwvuZ7Y0u9YaXuJDLESmuI5cnR7zv+KTsDYcMLmf0zqMwKjr9Xb5P5EvDMFBNHlWaQVySlqm2JGiAbGlDnGF8ThGuqqUIe/ocUqXPBOb6I/wUSLyin5PiNs=,iv:+cyJgDxXoWRCJc9TsJRvL7/Ze+M8A6rzmbps+zHD8sA=,tag:wRlAUW36avSC59Dn7Q4p8g==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1
