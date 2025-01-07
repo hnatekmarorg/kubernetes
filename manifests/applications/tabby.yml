@@ -253,6 +253,11 @@ spec:
       labels:
         app: tabby-api
     spec:
+      tolerations:
+        - effect: NoSchedule
+          key: nvidia.com/gpu
+          operator: "Equal"
+          value: present
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
