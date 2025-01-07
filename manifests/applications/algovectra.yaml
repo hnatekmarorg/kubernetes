@@ -20,7 +20,7 @@ spec:
         - name: regcred
       containers:
         - name: pizza-backend
-          image: gitea.hnatekmar.xyz/algovectra/pizza-backend:v0.0.58
+          image: gitea.hnatekmar.xyz/algovectra/pizza-backend:v0.0.60
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
