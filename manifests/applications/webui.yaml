@@ -53,11 +53,9 @@ spec:
           enabled: False
         extraEnvVars:
           - name: OLLAMA_BASE_URL
-            value: "http://ollama.ollama.svc.cluster.local:11434"
+            value: "https://ollama.hnatekmar.xyz"
           - name: WEBUI_AUTH
             value: "False"
-          - name: OLLAMA_BASE_URL
-            value: http://ollama.ollama.svc.cluster.local:11434
           - name: ENABLE_OAUTH_SIGNUP
             value: "true"
           - name: OAUTH_CLIENT_ID
