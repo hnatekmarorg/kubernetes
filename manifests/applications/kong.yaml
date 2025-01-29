@@ -13,7 +13,7 @@ spec:
   source:
     chart: kong
     repoURL: https://charts.konghq.com
-    targetRevision: 2.46.0
+    targetRevision: 2.47.0
     helm:
       releaseName: kong
       valuesObject:
