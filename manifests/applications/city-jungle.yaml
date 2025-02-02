@@ -20,7 +20,7 @@ spec:
         - name: regcred
       containers:
         - name: city-jungle
-          image: gitea.hnatekmar.xyz/algovectra/city-jungle:v0.0.5
+          image: gitea.hnatekmar.xyz/algovectra/city-jungle:v0.0.6
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
