@@ -18,10 +18,10 @@ data:
       debug:
         addr: 0.0.0.0:5001
     proxy:
-      remoteurl: https://registry-1.docker.io
+      remoteurl: http://192.168.88.25:9000
     storage:
       s3:
-        region: us-east-1
+        region: europe
         regionendpoint: https://console-minio.hnatekmar.xyz
         rootdirectory: docker-registry/docker.io
         secure: false
@@ -123,8 +123,8 @@ data:
       remoteurl: https://quay.io
     storage:
       s3:
-        region: us-east-1
-        regionendpoint: https://console-minio.hnatekmar.xyz
+        region: europe
+        regionendpoint: http://192.168.88.25:9000
         rootdirectory: docker-registry/quay.io
         secure: false
         bucket: docker-cache
@@ -225,8 +225,8 @@ data:
       remoteurl: https://ghcr.io
     storage:
       s3:
-        region: us-east-1
-        regionendpoint: https://console-minio.hnatekmar.xyz
+        region: europe
+        regionendpoint: http://192.168.88.25:9000
         rootdirectory: docker-registry/ghcr.io
         secure: false
         bucket: docker-cache
@@ -327,8 +327,8 @@ data:
       remoteurl: https://mirror.gcr.io
     storage:
       s3:
-        region: us-east-1
-        regionendpoint: https://console-minio.hnatekmar.xyz
+        region: europe
+        regionendpoint: http://192.168.88.25:9000
         rootdirectory: docker-registry/gcr.io
         secure: false
         bucket: docker-cache
