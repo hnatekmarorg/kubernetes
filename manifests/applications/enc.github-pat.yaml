@@ -7,9 +7,9 @@ spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:9fjyJ/Xb4yuoeg==,iv:95aPe5LmyXhpB0yFbdGF5I7NTZDkne3EKofRpctSDEA=,tag:aev8Is4C2S0UOG77lcAo3A==,type:str]
+        - name: ENC[AES256_GCM,data:S1YggGxfYHeB9A==,iv:yFzuUhxgmvctTe9mf3G2PKEN5PSg45MlusXL6N7Kq5w=,tag:sYdPch8jh0ZcstXX536hdQ==,type:str]
           stringData:
-            github_token: ENC[AES256_GCM,data:9SIHmHhr0YBe/CcJCoYUfJoZcKrwsV0bytVsiWc6YLzp+WLCc6iSvQ==,iv:4AXuY+Ov4leN83WBkuKepnzRPQnYpZBxqJ98Lz8XlDQ=,tag:IzstOpq0r5MQVhVE2Djq+Q==,type:str]
+            github_token: ENC[AES256_GCM,data:bfjJBPBS/xbzHHrnwL+UAiIJYbHxemUFcSe0JEd0WluytVESstUSrQ==,iv:paQ3MmjVRr0cjT1Y6pTBelu8ruOvukA2vvj3TjkY48Q=,tag:dSw+O7rADP3MGpH/cFhDIA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -19,14 +19,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxQVB6U0gvSk5sSTBIa1NG
-            OTlQM3NHNitLWGd2d0RDd0VQam1XdWxibUVzCnh3dXJRR251cURWSFh1bk9SRDVC
-            eVg2cEV3UjBUa0w3NEVUN2tuMzhxSFUKLS0tIHhHWnBWbXQySkRZT25lR0luMzR5
-            Zjd6U3VVQTFJTHZLMFdJTktkTmYxWlkKnWSEZOE8qRSF6M4AiOlSElPKcjnsFA5n
-            I9khU1q9mnPvdH/iO3RCujet0mymWI60RoHYdZy1ftIWHunsfEZhiw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNdmR0N1gwSUtHd3dJNzB2
+            WDlvRWx3cW13ckxKdlRXZnlOcmZ3OWhUYVJVCkgyYWJjV0M3aE9wdWdabkUvSlZQ
+            WXZLNFdFVC9RbUJ0elplc1VjYldBUFUKLS0tIGpFTm54L2hleWwvNDVOTC9iQWFn
+            VzJ6MFptR0xwQWxUcXBsVUp5Q2kxWTAKg71LULGjWZx7knT8hoFCpN6MBvyVWaV2
+            o7rB/ptKdaNoD4jriRGxHPnTLltpOhJd40zyO6M+6BPUwQxQyw0gkw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-02T15:44:32Z"
-    mac: ENC[AES256_GCM,data:Jd+v0fDZfZJeOQWlUaNUVNpWP+vkHdnDKfd2sY+iS+8tqXMWVCFj951S1mH2haePJb0Dvq1wqqQbuofI8908ewshKjdS8RCvavC/NFUTY3mJnqChJWh5cwX7q7EKOguxQMvrldh8OaoUxUzEEQpclWEyQaGeAoK4fjJO2X6Yxl8=,iv:v22CRVE269QcZQ9T+cHB66BU8AIGFZAiiYt4FhAwnYE=,tag:DkvM/wyMoRdEjnvjoE9lCw==,type:str]
+    lastmodified: "2025-02-02T15:50:31Z"
+    mac: ENC[AES256_GCM,data:gHeRtuvwSo19kSt+bBYqBOenBIKUqQytn+dV7qPUTeTTgJeboaIXCmqnbzPvfh6GNxnUfpLPZh2cP5tCfWpJ96StDwpqszhVvAXO8RaGvDInbKWW5QhW564WDcEiHtqXF5Hccza0CvroVbpxvftDl+iB2s4P0pYOTxPQd5iu0ak=,iv:kboci7YG6YbSJJkrTh9JF/rrh9sRTTLWC1gaMWGq2nE=,tag:2hNRJNt+JWgn9Lq8+ahplA==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1
