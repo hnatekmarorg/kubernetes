@@ -7,20 +7,20 @@ spec:
     # suspend reconciliation of the sops secret object
     suspend: false
     secretTemplates:
-        - name: ENC[AES256_GCM,data:2SLyFeaj,iv:NMYWszGdkVaEikdtbfaDiFv1lNV5RwA/+Srx1mxS/jk=,tag:Jy9NST+72KutzQosij+m2A==,type:str]
+        - name: ENC[AES256_GCM,data:HQxqlffL,iv:k1qaTm3+rPyynh0hCntRztjvlQZrlbyKGVXcbaFuV4U=,tag:xblEp9F/Nl5ohbdWSiCaFw==,type:str]
           stringData:
-            camera_url: ENC[AES256_GCM,data:dhbZMbh/yMS/t9fRkGohBPLAAMWTe6gkqD0=,iv:yvYKfkNnRGYefh2oUGlC9k6yDs6kkkyWW8gvWQUHCCA=,tag:H/dPETopAdXt0UPDUMrG/A==,type:str]
-            mongo_username: ENC[AES256_GCM,data:XVg4hA==,iv:A6dVzMnZ6SdjrcJvJZXwXcOCMCscAdIL157vJH7lk4g=,tag:iuERKpSpAuDABng0A6yAlg==,type:str]
-            mongo_password: ENC[AES256_GCM,data:fzXg+4qh,iv:yvaxW4Mp9+o5ZtqQe2Op42je8tnXCPjCwxfa076uPHI=,tag:ZRvNwL//x4+OW+5dejNapA==,type:str]
-            mongo_host: ENC[AES256_GCM,data:jwmkZqdoIRcof43XXvo=,iv:3OfpAeziJMCK7jaY3tovd/u1Dfy7/Zn2GViMjOgwAew=,tag:Xz2rmUQ9zCTfthfhoZY9/A==,type:str]
-            mongo_port: ENC[AES256_GCM,data:QLX0XLU=,iv:JhDy5JZpZTx5NKpF0OoABSaY7Jb3qsUiXS9PSllF+HE=,tag:pPnIf7XAg3XTlUGVfO5H5g==,type:str]
-            mongo_database_name: ENC[AES256_GCM,data:pqTMcVMDT2A=,iv:GAbaM8Uuk/PqrISiszz1eEgvKM2F0BJkW7TKJ/MKQ8w=,tag:ElVVVJZZbzcz4rITBTm5dQ==,type:str]
-            minio_url: ENC[AES256_GCM,data:BGPgDMGVIdwZqX2oEWwGcr/WHOFlKVGTS9Z2UTTIhVRhgA==,iv:u3UH3ypIsJ9lqDj+6lHewwcX/omyegtzeLYYOZuYGFw=,tag:AMRyv+w/pQm7m3oBQIwwOg==,type:str]
-            access_key: ENC[AES256_GCM,data:7ZIrBIxO25A7sy4yevgxA23g/kA=,iv:NjCFduS416Kh5PZxAT6stf3+GB2SsLayHdlLhXIAYsw=,tag:XKXPZLRXr+JK2UGSoyIOvA==,type:str]
-            secret_key: ENC[AES256_GCM,data:HSGUwZV2+lZ9vIugv13u+zKdhfAwbKTKmrBF9AakqLA3beGdHSTVSw==,iv:6hdcCKEfKA6XFx+37zhY2MZqBBAEEs41pzcidbUtnB0=,tag:QTUHZqhE2NWmemhSBd+vwQ==,type:str]
-            bucket_name: ENC[AES256_GCM,data:Ry/uVUkMOYBIT98=,iv:D4+UcA1dUy8DhdyrhqLlE2rYok9tE1B8nMN4jz+rvQs=,tag:F9GEjB6mm2uEAVuIWXf+uQ==,type:str]
-            bb_api_key: ENC[AES256_GCM,data:h6uQ68DMdRFlH6aOV4ZCyft3qgsCjP3BzVp2Wyx7gmVhRgsVsjkZSw==,iv:JaXq6LEftbr6cZFaYQJC6ObcYvKNaRwlsTH7KstueT4=,tag:Qdd0n8DEySCoewKAeRRwEA==,type:str]
-            bb_url: ENC[AES256_GCM,data:SR3Rv6EC24gwQIpsrt9DOUxMaJ2q2tLpY+ionjl3/RzvGiANyw==,iv:DvdYz9eoXOX0Tj7hnenKcvZT22DqZGr8K4rpJlnNgWg=,tag:PL72V3kn7QbgozrQXLqu3w==,type:str]
+            camera_url: ENC[AES256_GCM,data:SyWTnyY8+dpATx3+2ExcwDMskZwOLZtB+rQ=,iv:6fn2Pk+i8LNPb0DcnPvvbFQOc035CNF3iwDecIp+fnc=,tag:guTigqJam2TuNaCTfkHUXw==,type:str]
+            mongo_username: ENC[AES256_GCM,data:ZZ3mDA==,iv:UdcvfdLqTFatfDCig38fXvb1A338qyi/gP8Zyab1zVk=,tag:GGeGtUVIM+02fAfQfxrZAg==,type:str]
+            mongo_password: ENC[AES256_GCM,data:3lwuq/g5,iv:pL2wQWyxptHAA8Grhvt4fYfQhS/omrUihf9qrsoKIpE=,tag:VeKGdtLULOSgI8p5/dc2Dg==,type:str]
+            mongo_host: ENC[AES256_GCM,data:7U94v3KyJV70XymNms4=,iv:0TC4N7Jged6qhGjzEnilcSVMpcZZjaz7a0O+ug48W2g=,tag:B+Av3Gl3xwL/yDejum3SPw==,type:str]
+            mongo_port: ENC[AES256_GCM,data:/UDOzcU=,iv:j8IBxIfqixKObPxMSGtP2a1K9w3l6Prno97Y428Er0A=,tag:qZF46N5TwGz4fatGXKTGWQ==,type:str]
+            mongo_database_name: ENC[AES256_GCM,data:OT68uootwr4=,iv:6A8uJcmZrfOg8WoRNRyC+okU0l8z1pwYFP/WNsqZSDY=,tag:0BbZzCI7ISpXbA8P56QDuQ==,type:str]
+            minio_url: ENC[AES256_GCM,data:fQ7Gfo3J8R6RVV0OrOIJ27MtFQSJ4mtjRBEzhdxX/VENFg==,iv:KLBIIkvXVRJxpx4eYBbZOJ8ass/6V54GB5kU7g64SLU=,tag:gqn7hEmh6Mkw8eg/yWM7Pw==,type:str]
+            access_key: ENC[AES256_GCM,data:HuRqyTAk4S6lwSy16ty6ma+fPaI=,iv:j9XdrGwknYsxu8Bt1fPWrMFxyJNJYdm4CZ8rKOnicQY=,tag:TOtO/XLMUpX4MddCvAL8Qg==,type:str]
+            secret_key: ENC[AES256_GCM,data:y8nRODL3kd7IkbkmU6rXqURAofQenmAFl3FUPOB4YLgK2CWHlv87+Q==,iv:SEN/ZogWq5OiKnKS31ZoWQof0pfwoVwXk9Yuq0Mo43A=,tag:pQ521hXjfg/7Dfq85CArvg==,type:str]
+            bucket_name: ENC[AES256_GCM,data:JMoXIKufmuA6iTU=,iv:ELUOhtzQhTYQSPejTDcyhOCpASK91XHWzp/MR/TSlY8=,tag:lSuA9N4WHmZmAo3Mjyk4TA==,type:str]
+            bb_api_key: ENC[AES256_GCM,data:UfL7enbCMqVdOE5l01x2HiyUVvZ3PEt44vFLQWENDGNp1VJDrgP78g==,iv:CTXhG0cYXSHfXcyArglk5sE+nr+mvNL8ovkgxHVSv6I=,tag:KWIea6jiL9qhycZO8/73aA==,type:str]
+            bb_url: ENC[AES256_GCM,data:GIBXFfufatsA7l0cJbRqc9srU3dtHiOUdNqE4C2FEw9RNxUUcQ==,iv:RQtgXQ9kVgwwHQI0bttjDr5/mcJahuBvgq0r2ra+Q5E=,tag:ou4u12xwlFKgIaQqiHi9YA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -30,14 +30,14 @@ sops:
         - recipient: age1t9wspfgy0nxrc9d3frmp85g4d5ug6ksf66pv68ycptv0fwsxq9fqxuhma9
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsZWpJeGd4QWhUTU5CODBF
-            MXhYbmRjSWQ4eTNQWFRmZ3FDZlFOSmE0M21rCjVxTlkyL2xiY1cxZUI5dlJkRXlY
-            R1NTMnNTTEhZY3NOYklnK0thcDA3RkEKLS0tIGc2TVFWMDRXUTV4eVRLNStsNEll
-            T0N4SVJXQ3c2d3Zmb2RVeUUvdjlmU0EKT7j76ZKM9SXEIRY9Qldqr25yyQwRRC/e
-            I6vVO1w714k5Mw09lHNdSYfw34MDmFZUSpGXwHyW6aB+2noc9Krh5A==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByNEFwaHA2T3VnRHdNSXhJ
+            eE14YnNhUzFjV0hRTExPb3phNWJtSlQ5amhFCkZpeTU2cXJHTWZ5WUM2cTZpYlFN
+            bGt1dkhzRDZmQm9HeUVydk9OZWVUV3MKLS0tIEErUHNhSFlkcnQwK0g3RW5oR2Rv
+            dHNOVlBxWkxIanlLOWhLYk1UUWl6d3cKUb62T21NsLW0XCDWeLHtXwq0yACk3c4m
+            /QvH++v7+i9s1Jrn/1aSGZw2eeUEhZb1AHfdl6TS0g6PsprvaPn3CA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-26T19:29:01Z"
-    mac: ENC[AES256_GCM,data:bLj+W9kGDYxc53usoSROb59Z112AjfdlJPOH0ABs3fjAIFZDkE81dRbdJNrbfolptbmd0Gyr4MJMlQ/3jmhiSl/wICuf+9Wbc5I5FMQV/kfivOvOs0xXSjWK3cR7zX33ACGbSdjTVAf4nGMt//dYl/Sy6WGxNCcYg63Vm0/j0gg=,iv:p+sse+DFbdLO3dR0IbDX1ZGb48JVeMoLr8Jknu75FwA=,tag:x1UYXDeQnHWmZLMZ/0U18Q==,type:str]
+    lastmodified: "2025-02-02T08:26:48Z"
+    mac: ENC[AES256_GCM,data:5MpTpzC3VZnj1Lbn8KLymQ+Ho6wMmWrpLr2qJ/MtWYR6lPWvhowoW1MYGcQsw8rgAkB6DQVoRvOm1F52Z5dXLJsnTKKBhiD2gzoe775oUcz528FT82nbiVpbGbtpw5T3GRVkawgYLTLdhwyy39YOdtWBMAt0eMmvpmtHfj1ovNo=,iv:HkzciSVIZ8qbL4saSoT1pQeP+oufpjad73rEq4r6AeE=,tag:pGBk8o1IAR8teWvmdOEEYQ==,type:str]
     pgp: []
     encrypted_suffix: Templates
     version: 3.9.1
