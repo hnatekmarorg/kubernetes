@@ -18,11 +18,11 @@ data:
       debug:
         addr: 0.0.0.0:5001
     proxy:
-      remoteurl: http://192.168.88.25:9000
+      remoteurl: https://registry-1.docker.io
     storage:
       s3:
         region: europe
-        regionendpoint: https://console-minio.hnatekmar.xyz
+        regionendpoint: http://192.168.88.25:9000
         rootdirectory: docker-registry/docker.io
         secure: false
         bucket: docker-cache
