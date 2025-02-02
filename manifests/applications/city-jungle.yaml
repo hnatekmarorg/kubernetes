@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: city-jungle
+  namespace: default
+  labels:
+    app: city-jungle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: city-jungle
+  template:
+    metadata:
+      name: city-jungle
+      labels:
+        app: city-jungle
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: city-jungle
+          image: gitea.hnatekmar.xyz/algovectra/city-jungle:v0.0.3
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: config
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: city-jungle
+  namespace: default
+spec:
+  selector:
+    app: city-jungle
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: city-jungle
+  namespace: default
+spec:
+  ingressClassName: kong
+  rules:
+    - host: mentem.algovectra.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: city-jungle
+                port:
+                  number: 80
