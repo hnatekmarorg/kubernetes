@@ -43,7 +43,7 @@ spec:
   source:
     chart: ollama
     repoURL: https://otwld.github.io/ollama-helm
-    targetRevision: 1.4.0
+    targetRevision: 1.4.1
     helm:
       releaseName: ollama
       valuesObject:
@@ -54,6 +54,10 @@ spec:
         runtimeClassName: "nvidia"
         extraEnv:
           - name: OLLAMA_FLASH_ATTENTION
+            value: "1"
+          - name: OLLAMA_NUM_THREADS
+            value: "64"
+          - name: OLLAMA_MAX_LOADED
             value: "1"
         ingress:
           enabled: true
