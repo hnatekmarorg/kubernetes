@@ -49,12 +49,21 @@ kind: Ingress
 metadata:
   name: pizza-admin
   namespace: default
+  annotations:
+    konghq.com/strip-path: "true"
 spec:
   ingressClassName: kong
   rules:
     - host: vosime.algovectra.com
       http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: pizza-backend
+                port:
+                  number: 3000
           - path: /
             pathType: Prefix
             backend:
