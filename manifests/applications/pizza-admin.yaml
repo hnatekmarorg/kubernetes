@@ -49,8 +49,6 @@ kind: Ingress
 metadata:
   name: pizza-admin
   namespace: default
-  annotations:
-    konghq.com/strip-path: "true"
 spec:
   ingressClassName: kong
   rules:
