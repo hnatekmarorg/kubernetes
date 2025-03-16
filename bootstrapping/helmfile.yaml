@@ -20,7 +20,7 @@ releases:
   - name: gha-runner-scale-set-controller
     namespace: arc-systems
     chart: arc/gha-runner-scale-set-controller
-    version: 0.9.3
+    version: 0.10.1
   - name: gha-runner-scale-set
     namespace: arc-systems
     chart: arc/gha-runner-scale-set
