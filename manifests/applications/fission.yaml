@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    chart: fission-charts
+    chart: fission-all
     repoURL: https://fission.github.io/fission-charts/
     targetRevision: 1.21.0
     helm:
