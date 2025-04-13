@@ -19,7 +19,7 @@ spec:
       valuesObject:
         persistence:
           enabled: false
-        routerServiceType: CluesterIP # Internal only
+        routerServiceType: ClusterIP # Internal only
         
   destination:
     server: "https://kubernetes.default.svc"
