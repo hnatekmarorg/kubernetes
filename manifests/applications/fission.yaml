@@ -17,6 +17,8 @@ spec:
     helm:
       releaseName: fission-all
       valuesObject:
+        persistence:
+          enabled: false
         routerServiceType: CluesterIP # Internal only
         
   destination:
