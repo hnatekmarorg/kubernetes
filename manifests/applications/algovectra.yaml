@@ -20,8 +20,11 @@ spec:
         - name: regcred
       containers:
         - name: pizza-backend
-          image: gitea.hnatekmar.xyz/algovectra/pizza-backend:v0.0.70
+          image: gitea.hnatekmar.xyz/algovectra/pizza-backend:v0.0.71
           imagePullPolicy: IfNotPresent
+          env:
+            - name: crust_infer_server
+              value: "http://router.fission.svc.cluster.local/pizza-infer"
           envFrom:
             - secretRef:
                 name: config
