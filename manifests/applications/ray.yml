@@ -15,7 +15,7 @@ spec:
     repoURL: https://ray-project.github.io/kuberay-helm/
     targetRevision: 1.1.0
     helm:
-      releaseName: ray-cluster
+      releaseName: kuberay-operator
       valuesObject: {}
   destination:
     server: "https://kubernetes.default.svc"
