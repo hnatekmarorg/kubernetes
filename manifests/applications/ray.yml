@@ -7,6 +7,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ray-operator-crds
+  namespace: argocd
 spec:
   project: default
   source:
@@ -24,6 +25,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ray-operator
+  namespace: argocd
 spec:
   source:
     repoURL: https://github.com/ray-project/kuberay
