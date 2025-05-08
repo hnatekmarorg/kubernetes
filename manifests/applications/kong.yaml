@@ -17,6 +17,8 @@ spec:
     helm:
       releaseName: kong
       valuesObject:
+        podAnnotations:
+          konghq.com/plugins: nginx
         deployment:
           prefixDir:
             sizeLimit: 10Gi
