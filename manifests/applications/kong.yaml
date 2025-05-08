@@ -46,6 +46,7 @@ config:
   per_consumer: true
   status_code_metrics: true
   latency_metrics: true
+   bandwidth_metrics: true
 plugin: prometheus
 ---
 apiVersion: v1
