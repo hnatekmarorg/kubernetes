@@ -17,6 +17,10 @@ spec:
     helm:
       releaseName: kong
       valuesObject:
+        admin:
+          enabled: true
+          apiPort: 8001
+          apiHost: 0.0.0.0
         podAnnotations:
           konghq.com/plugins: prometheus
         deployment:
