@@ -15,7 +15,8 @@ spec:
     repoURL: https://kedacore.github.io/charts
     chart: keda
     targetRevision: 2.17.0 # Check for latest version
-    helm: {}
+    helm: 
+      valuesObject: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: keda
