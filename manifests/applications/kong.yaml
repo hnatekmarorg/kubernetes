@@ -18,7 +18,7 @@ spec:
       releaseName: kong
       valuesObject:
         podAnnotations:
-          konghq.com/plugins: nginx
+          konghq.com/plugins: prometheus
         deployment:
           prefixDir:
             sizeLimit: 10Gi
