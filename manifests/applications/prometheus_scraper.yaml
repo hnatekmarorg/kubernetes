@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-scraper
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-scraper
+  template:
+    metadata:
+      labels:
+        app: prometheus-scraper
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:v2.41.0
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/prometheus
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-scrape-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-scrape-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+
+    scrape_configs:
+      - job_name: 'kong-metrics'
+        static_configs:
+          - targets: ['kong-kong-metrics.kong.svc.cluster.local:8100']
+        metrics_path: /metrics
+        scheme: http
+
+    remote_write:
+      - url: "http://192.168.88.25:30104/api/v1/write"
