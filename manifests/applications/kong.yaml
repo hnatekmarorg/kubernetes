@@ -45,5 +45,6 @@ metadata:
 config:
   per_consumer: true
   status_code_metrics: true
+  latency_metrics: true
 plugin: prometheus
 
