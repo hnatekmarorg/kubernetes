@@ -49,6 +49,6 @@ metadata:
   labels:
     global: "true"
 config:
-  per_consumer: true
+  per_consumer: false
 plugin: prometheus
 
