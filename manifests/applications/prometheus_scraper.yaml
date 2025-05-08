@@ -45,7 +45,7 @@ data:
     scrape_configs:
       - job_name: 'kong-metrics'
         static_configs:
-          - targets: ['kong-kong-metrics.kong.svc.cluster.local:8100/metrics']
+          - targets: ['kong-kong-metrics.kong.svc.cluster.local:10255', 'kong-kong-proxy.kong.svc.cluster.local:8100']
         metrics_path: /metrics
         scheme: http
 
