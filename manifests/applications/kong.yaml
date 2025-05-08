@@ -37,7 +37,7 @@ spec:
       - CreateNamespace=true
 ---
 apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
+kind: KongClusterPlugin
 metadata:
   name: prometheus
   namespace: default
