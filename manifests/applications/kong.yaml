@@ -40,7 +40,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: prometheus
-  namespace: kong
+  namespace: default
 config:
   per_consumer: true
   status_code_metrics: true
