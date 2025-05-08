@@ -33,3 +33,14 @@ spec:
       allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: prometheus
+  namespace: kong
+config:
+  per_consumer: true
+  status_code_metrics: true
+  latency_metrics: true
+plugin: prometheus
