@@ -14,14 +14,9 @@ spec:
   source:
     repoURL: https://kedacore.github.io/charts
     chart: keda
-    targetRevision: 2.14.2  # Check for latest version
+    targetRevision: 2.17.0 # Check for latest version
     helm:
-      values: |
-        metricsServer:
-          enabled: true
-        prometheus:
-          metricServer:
-            enabled: true
+      values: {}
 
   destination:
     server: https://kubernetes.default.svc
