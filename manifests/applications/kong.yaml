@@ -17,10 +17,6 @@ spec:
     helm:
       releaseName: kong
       valuesObject:
-        admin:
-          enabled: true
-          apiPort: 8001
-          apiHost: 0.0.0.0
         podAnnotations:
           konghq.com/plugins: prometheus
         deployment:
@@ -47,6 +43,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
 config:
-  per_consumer: false
+  per_consumer: true
+  status_code_metrics: true
 plugin: prometheus
 
