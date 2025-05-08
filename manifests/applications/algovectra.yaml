@@ -54,6 +54,8 @@ kind: Ingress
 metadata:
   name: ingress
   namespace: default
+  annotations:
+    konghq.com/plugins: "prometheus"
 spec:
   ingressClassName: kong
   rules:
