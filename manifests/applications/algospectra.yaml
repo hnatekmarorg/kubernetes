@@ -20,7 +20,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://github.com/Hnatekmar/algovectra.git
-    path: main
+    path: ./
     # directory
     directory:
       recurse: true
