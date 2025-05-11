@@ -19,7 +19,7 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: git@github.com:Algospectra/kubernetes.git
+    repoURL: https://github.com/Hnatekmar/algovectra.git
     path: main
     # directory
     directory:
