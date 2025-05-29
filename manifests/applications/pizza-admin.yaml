@@ -22,6 +22,9 @@ spec:
         - name: pizza-admin
           image: gitea.hnatekmar.xyz/algovectra/pizza-admin:0.0.41
           imagePullPolicy: IfNotPresent
+          env:
+            - name: VITE_BACKEND_URL
+              value: https://pizza-checker-api.algovectra.com/
           envFrom:
             - secretRef:
                 name: config
