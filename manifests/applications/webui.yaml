@@ -43,7 +43,7 @@ spec:
   source:
     chart: open-webui
     repoURL: https://helm.openwebui.com/
-    targetRevision: 6.24.0
+    targetRevision: 7.0.1
     helm:
       releaseName: open-webui
       valuesObject:
