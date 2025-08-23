@@ -14,7 +14,7 @@ spec:
   source:
     repoURL: "https://cetic.github.io/helm-charts"  # Helm repository URL
     chart: "thingsboard"  # Must be top-level field (not under helm)
-    targetRevision: "0.17.0"  # MUST be valid chart version (check index.yaml)
+    targetRevision: "0.1.2"  # MUST be valid chart version (check index.yaml)
     helm:
       valuesObject:
         domain: "thingsboard.hnatekmar.xyz"
