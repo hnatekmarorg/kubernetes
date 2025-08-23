@@ -1,0 +1,67 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: thingsboard
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://cetic.github.io/helm-charts
+    targetRevision: main
+    helm:
+      chart: thingsboard
+      releaseName: thingsboard
+      values: |
+        # Domain configuration
+        domain: "thingsboard.hnatekmar.xyz"
+        
+        # Ingress configuration (Nginx)
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: "nginx"
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+          hosts:
+            - host: thingsboard.hnatekmar.xyz
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - thingsboard.hnatekmar.xyz
+              secretName: thingsboard-tls
+        
+        # Storage configuration (NFS)
+        persistence:
+          storageClass: "nfs-client"
+          size: 10Gi  # Adjust based on expected device count
+        
+        # Resource allocation (optimized for ~50k devices)
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2000m"
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
+        
+        # Database configuration (critical for performance)
+        database:
+          type: "hybrid"  # hybrid (SQL + Cassandra) recommended for scale
+          cassandra:
+            persistence:
+              storageClass: "nfs-client"
+              size: 50Gi  # Scale as needed
+        
+        # Replicas (for HA)
+        replicas: 2
+        
+        # Disable unused components to reduce costs
+        redis:
+          enabled: false  # Use Cassandra as primary cache for simplicity
+        tbTransport:
+          mqtt:
+            enabled: true
+          coap:
+            enabled: false  # Disable if not needed
