@@ -7,16 +7,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: thingsboard
-  namespace: argocd  # Must be in ArgoCD's namespace
+  namespace: argocd
 spec:
   project: default
+  # CORRECTED SOURCE STRUCTURE (critical fix)
   source:
-    repoURL: https://cetic.github.io/helm-charts
-    targetRevision: main
+    repoURL: "https://cetic.github.io/helm-charts"  # Helm repository URL
+    chart: "thingsboard"  # Must be top-level field (not under helm)
+    targetRevision: "0.17.0"  # MUST be valid chart version (check index.yaml)
     helm:
-      chart: thingsboard
-      releaseName: thingsboard
-      values: |
+      valuesObject:
         domain: "thingsboard.hnatekmar.xyz"
         ingress:
           enabled: true
@@ -49,12 +49,11 @@ spec:
         redis:
           enabled: false
 
-  # CRITICAL FIX: Destination section was MISSING
+  # REQUIRED DESTINATION
   destination:
-    server: "https://kubernetes.default.svc"  # Points to your cluster API
-    namespace: "thingsboard"  # Target namespace (MUST EXIST!)
+    server: "https://kubernetes.default.svc"
+    namespace: "thingsboard"
 
-  # Required sync policy
   syncPolicy:
     automated:
       prune: true
