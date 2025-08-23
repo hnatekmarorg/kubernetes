@@ -1,8 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: thingsboard
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: thingsboard
-  namespace: argocd
+  namespace: argocd  # Must be in ArgoCD's namespace
 spec:
   project: default
   source:
@@ -12,10 +17,7 @@ spec:
       chart: thingsboard
       releaseName: thingsboard
       values: |
-        # Domain configuration
         domain: "thingsboard.hnatekmar.xyz"
-        
-        # Ingress configuration (Nginx)
         ingress:
           enabled: true
           annotations:
@@ -31,13 +33,9 @@ spec:
             - hosts:
                 - thingsboard.hnatekmar.xyz
               secretName: thingsboard-tls
-        
-        # Storage configuration (NFS)
         persistence:
           storageClass: "nfs-client"
-          size: 10Gi  # Adjust based on expected device count
-        
-        # Resource allocation (optimized for ~50k devices)
+          size: 10Gi
         resources:
           requests:
             memory: "4Gi"
@@ -45,23 +43,19 @@ spec:
           limits:
             memory: "8Gi"
             cpu: "4000m"
-        
-        # Database configuration (critical for performance)
         database:
-          type: "hybrid"  # hybrid (SQL + Cassandra) recommended for scale
-          cassandra:
-            persistence:
-              storageClass: "nfs-client"
-              size: 50Gi  # Scale as needed
-        
-        # Replicas (for HA)
+          type: "hybrid"
         replicas: 2
-        
-        # Disable unused components to reduce costs
         redis:
-          enabled: false  # Use Cassandra as primary cache for simplicity
-        tbTransport:
-          mqtt:
-            enabled: true
-          coap:
-            enabled: false  # Disable if not needed
+          enabled: false
+
+  # CRITICAL FIX: Destination section was MISSING
+  destination:
+    server: "https://kubernetes.default.svc"  # Points to your cluster API
+    namespace: "thingsboard"  # Target namespace (MUST EXIST!)
+
+  # Required sync policy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
