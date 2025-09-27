@@ -2,6 +2,7 @@ apiVersion: isindir.github.com/v1alpha3
 kind: SopsSecret
 metadata:
     name: pizza-secret
+    namespace: default
 spec:
     secretTemplates:
         - name: ENC[AES256_GCM,data:esyyGR0c,iv:nbRwkSk5C/hUPJsGgfmdVDdmKYaewTgSx+0u/11YK2M=,tag:ZeKOw2K296CU9999yyrvJg==,type:str]
