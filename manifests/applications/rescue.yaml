@@ -11,29 +11,16 @@ metadata:
   name: rescue-cluster-reader
 rules:
 - apiGroups: [""]
-  resources:
-    - nodes
-    - namespaces
-    - pods
-    - services
-    - endpoints
-    - configmaps
-    - secrets
+  resources: ["nodes", "namespaces", "pods", "services", "endpoints", "configmaps", "secrets"]
   verbs: ["get", "list", "watch"]
 - apiGroups: ["apps"]
-  resources:
-    - deployments
-    - daemonsets
-    - replicasets
+  resources: ["deployments", "daemonsets", "replicasets"]
   verbs: ["get", "list", "watch"]
 - apiGroups: ["networking.k8s.io"]
-  resources:
-    - ingresses
+  resources: ["ingresses"]
   verbs: ["get", "list", "watch"]
 - apiGroups: ["rbac.authorization.k8s.io"]
-  resources:
-    - roles
-    - rolebindings
+  resources: ["roles", "rolebindings"]
   verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -49,21 +36,15 @@ roleRef:
   name: rescue-cluster-reader
   apiGroup: rbac.authorization.k8s.io
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: rescue-sa-token
-  annotations:
-    kubernetes.io/service-account.name: rescue-sa
-type: kubernetes.io/service-account-token
----
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: rescue-token-logger
+  namespace: default
   labels:
     app: rescue-token-logger
 spec:
+  ttlSecondsAfterFinished: 600 # Optional: Cleans up the job 10 mins after completion
   template:
     spec:
       serviceAccountName: rescue-sa
@@ -75,27 +56,34 @@ spec:
           - /bin/sh
           - -c
           - |
-            # Wait for token to be available
-            while [ ! -f /var/run/secrets/kubernetes.io/serviceaccount/token ]; do
+            # 1. Define standard mount path for Projected Volume tokens
+            TOKEN_PATH="/var/run/secrets/kubernetes.io/serviceaccount/token"
+
+            # 2. Wait for token (usually instant, but good practice)
+            while [ ! -f "$TOKEN_PATH" ]; do
               echo "[INFO] Waiting for service account token..." >&2
-              sleep 3
+              sleep 2
             done
 
-            TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-            CA_CERT=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
-            API_SERVER="https://kubernetes.default.svc.cluster.local:443"
+            TOKEN=$(cat "$TOKEN_PATH")
+            
+            # 3. Output logic
+            echo "============================================================" >&2
+            echo "🔑 CLUSTER RESCUE TOKEN (DO NOT SHARE):" >&2
+            echo "" >&2
+            echo "$TOKEN" >&2
+            echo "" >&2
+            echo "============================================================" >&2
+            echo "📝 COPY-PASTE COMMAND (Insecure/Rescue Mode):" >&2
+            echo "" >&2
+            # Note: kubectl does not support inline base64 CA data in flags. 
+            # Using --insecure-skip-tls-verify is standard for 'rescue' ops.
+            echo "kubectl --token=\"$TOKEN\" --server=\"https://kubernetes.default.svc\" --insecure-skip-tls-verify=true get nodes" >&2
+            echo "============================================================" >&2
 
-            # LOG THE TOKEN IN PLAIN TEXT FOR LOKI (no markdown, no HTML)
-            echo "🔑 CLUSTER RESCUE TOKEN (DO NOT SHARE): $TOKEN" >&2
-            echo "📝 Use this token with kubectl:" >&2
-            echo "   kubectl --token=\"$TOKEN\" --server=\"$API_SERVER\" --certificate-authority=data:application/x-pem-file;base64,$(echo "$CA_CERT" | base64 -w 0) --insecure-skip-tls-verify=false get nodes" >&2
-            echo "⚠️ Delete this job after use!" >&2
-
-            # Exit cleanly — job completes
-            exit 0
         securityContext:
           readOnlyRootFilesystem: true
         resources:
           limits:
-            memory: "32Mi"
-            cpu: "10m"
+            memory: "64Mi"
+            cpu: "50m"
