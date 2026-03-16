@@ -1,50 +1,46 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: rescue
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: rescue-sa
-  namespace: default
+  namespace: rescue
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: rescue-cluster-reader
+  name: rescue-admin
 rules:
-- apiGroups: [""]
-  resources: ["nodes", "namespaces", "pods", "services", "endpoints", "configmaps", "secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["apps"]
-  resources: ["deployments", "daemonsets", "replicasets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["networking.k8s.io"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["rbac.authorization.k8s.io"]
-  resources: ["roles", "rolebindings"]
-  verbs: ["get", "list", "watch"]
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: rescue-sa-binding
+  name: rescue-admin-binding
 subjects:
 - kind: ServiceAccount
   name: rescue-sa
-  namespace: default
+  namespace: rescue
 roleRef:
   kind: ClusterRole
-  name: rescue-cluster-reader
+  name: rescue-admin
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: rescue-token-logger-o1
-  namespace: default
+  name: rescue-admin-job
+  namespace: rescue
   labels:
-    app: rescue-token-logger
+    app: rescue-admin
 spec:
-  ttlSecondsAfterFinished: 600 # Optional: Cleans up the job 10 mins after completion
+  ttlSecondsAfterFinished: 300
   template:
     spec:
       serviceAccountName: rescue-sa
@@ -56,34 +52,56 @@ spec:
           - /bin/sh
           - -c
           - |
-            # 1. Define standard mount path for Projected Volume tokens
-            TOKEN_PATH="/var/run/secrets/kubernetes.io/serviceaccount/token"
-
-            # 2. Wait for token (usually instant, but good practice)
-            while [ ! -f "$TOKEN_PATH" ]; do
-              echo "[INFO] Waiting for service account token..." >&2
-              sleep 2
-            done
-
-            TOKEN=$(cat "$TOKEN_PATH")
+            set -e
             
-            # 3. Output logic
+            # 1. Get service account token
+            TOKEN_PATH="/var/run/secrets/kubernetes.io/serviceaccount/token"
+            if [ ! -f "$TOKEN_PATH" ]; then
+              echo "[ERROR] Service account token not found!" >&2
+              exit 1
+            fi
+            TOKEN=$(cat "$TOKEN_PATH")
+
+            # 2. Get CA certificate
+            CA_CERT_PATH="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+            if [ ! -f "$CA_CERT_PATH" ]; then
+              echo "[ERROR] CA certificate not found!" >&2
+              exit 1
+            fi
+            CA_CERT=$(cat "$CA_CERT_PATH")
+            CA_CERT_B64=$(echo "$CA_CERT" | base64 -w 0 2>/dev/null || echo "$CA_CERT" | base64)
+
+            # 3. Output kubeconfig
             echo "============================================================" >&2
-            echo "🔑 CLUSTER RESCUE TOKEN (DO NOT SHARE):" >&2
+            echo "🔑 KUBECONFIG (DO NOT SHARE):" >&2
             echo "" >&2
-            echo "$TOKEN" >&2
+            echo "apiVersion: v1" >&2
+            echo "kind: Config" >&2
             echo "" >&2
-            echo "============================================================" >&2
-            echo "📝 COPY-PASTE COMMAND (Insecure/Rescue Mode):" >&2
+            echo "clusters:" >&2
+            echo "- cluster:" >&2
+            echo "    certificate-authority-data: ${CA_CERT_B64}" >&2
+            echo "    server: https://172.16.100.147:6443" >&2
+            echo "  name: cluster" >&2
             echo "" >&2
-            # Note: kubectl does not support inline base64 CA data in flags. 
-            # Using --insecure-skip-tls-verify is standard for 'rescue' ops.
-            echo "kubectl --token=\"$TOKEN\" --server=\"https://kubernetes.default.svc\" --insecure-skip-tls-verify=true get nodes" >&2
+            echo "users:" >&2
+            echo "- name: user" >&2
+            echo "  user:" >&2
+            echo "    token: ${TOKEN}" >&2
+            echo "" >&2
+            echo "contexts:" >&2
+            echo "- context:" >&2
+            echo "    cluster: cluster" >&2
+            echo "    user: user" >&2
+            echo "  name: context" >&2
+            echo "" >&2
+            echo "current-context: context" >&2
+            echo "" >&2
             echo "============================================================" >&2
 
         securityContext:
           readOnlyRootFilesystem: true
         resources:
           limits:
-            memory: "64Mi"
-            cpu: "50m"
+            memory: "128Mi"
+            cpu: "100m"
