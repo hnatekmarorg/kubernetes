@@ -39,7 +39,7 @@ roleRef:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: rescue-token-logger
+  name: rescue-token-logger-recovery
   namespace: default
   labels:
     app: rescue-token-logger
