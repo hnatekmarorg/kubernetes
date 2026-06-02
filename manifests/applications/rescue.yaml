@@ -95,6 +95,7 @@ spec:
             echo "    user: user" >&2
             echo "  name: context" >&2
             echo "" >&2
+            echo ""
             echo "current-context: context" >&2
             echo "" >&2
             echo "============================================================" >&2
